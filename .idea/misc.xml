@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Meu Computador/AndroidStudioProjects/CantinaToshio/app/src/main/res/drawable/border.xml" value="0.224" />
+        <entry key="..\:/Users/Meu Computador/AndroidStudioProjects/CantinaToshio/app/src/main/res/drawable/pratovetor.xml" value="0.224" />
+        <entry key="..\:/Users/Meu Computador/AndroidStudioProjects/CantinaToshio/app/src/main/res/layout/activity_click_pedidos.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/Meu Computador/AndroidStudioProjects/CantinaToshio/app/src/main/res/layout/activity_main.xml" value="0.33697916666666666" />
         <entry key="..\:/Users/Meu Computador/AndroidStudioProjects/CantinaToshio/app/src/main/res/layout/fragment_bebidas_home.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/Meu Computador/AndroidStudioProjects/CantinaToshio/app/src/main/res/layout/fragment_doces_home.xml" value="0.35104166666666664" />

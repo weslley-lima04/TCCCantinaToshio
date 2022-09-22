@@ -1,10 +1,12 @@
 package com.cantinatoshio.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,8 +31,8 @@ public class PedidosFragment extends Fragment
 
     //arrays a serem usados na lista
     String[] datapedido = {"20/08/2022"};
-    String[] horapedido = {"00:00"};
-    //int[] idpedido = {0};
+    String[] horapedido = {"22:05"};
+    String[] idpedido = {"0000"};
     String[] status = {"Finalizado"};
 
     @Override
@@ -44,8 +46,30 @@ public class PedidosFragment extends Fragment
 
       listapedidos.setAdapter(adapterPedidos);
 
+      //clique pra abrir nova janela
+      listapedidos.setOnItemClickListener(new AdapterView.OnItemClickListener()
+      {
+          @Override
+          public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+          {
+              //pedindo pra abrir nova janela
+              Intent intent = new Intent(getContext(), ClickPedidosActivity.class);
+              //colocando itens nela
+              intent.putExtra("dataPedido", datapedido[i]);
+              intent.putExtra("horaPedido", horapedido[i]);
+              intent.putExtra("idPedido", idpedido[i]);
+              intent.putExtra("statusPedido", status[i]);
+
+              startActivity(intent);
+
+
+          }
+      });
+
       return view;
     }
+
+    //adaptador de pedidos como classe interna
 
     public class AdapterPedidos extends BaseAdapter{
 

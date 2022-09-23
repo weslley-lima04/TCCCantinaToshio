@@ -22,13 +22,6 @@ public class PedidosFragment extends Fragment
 {
     ListView listapedidos;
 
-    /*
-    Date date = new Date();
-    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    String data = dateFormat.format(date);
-
-    Date data = Calendar.getInstance().getTime();*/
-
     //arrays a serem usados na lista
     String[] datapedido = {"20/08/2022"};
     String[] horapedido = {"22:05"};
@@ -112,6 +105,8 @@ public class PedidosFragment extends Fragment
 
             return v;
         }
+
+
     }
 
 

@@ -13,7 +13,7 @@ public class ClickPedidosActivity extends AppCompatActivity
 {
 
     TextView idPedido, statusPedido;
-    EditText dataPedido;
+    TextView dataPedido;
     //posteriormente, status do Pedido, pagamento e data entrarão aqui
 
     @Override

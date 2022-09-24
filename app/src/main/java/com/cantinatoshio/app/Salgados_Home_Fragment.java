@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.card.MaterialCardView;
+
 
 
 public class Salgados_Home_Fragment extends Fragment
@@ -41,6 +43,16 @@ public class Salgados_Home_Fragment extends Fragment
 
         //aqui vem o clique pra nova janela
 
+        lista_salgados.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Toast.makeText(getContext(), "Funcionando", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //teste
+
 
         return view;
     }
@@ -51,7 +63,7 @@ public class Salgados_Home_Fragment extends Fragment
         @Override
         public int getCount()
         {
-            return nomeProduto.length;
+            return imgProduto.length;
         }
 
         @Override
@@ -69,10 +81,11 @@ public class Salgados_Home_Fragment extends Fragment
         @Override
         public View getView(int i, View view, ViewGroup viewGroup)
         {
-            View v = getLayoutInflater().inflate(R.layout.modelo_produtos, null);
+
             TextView txtnomeProduto, txtdescProduto, txtprecoProduto, txtqtdeProduto;
             CardView produtoCardView;
             ImageView modelimgProduto;
+            View v = getLayoutInflater().inflate(R.layout.modelo_produtos, null);
 
             //produtoCardView = v.findViewById(R.id.cardProduto);
             txtnomeProduto = v.findViewById(R.id.nomeProduto);

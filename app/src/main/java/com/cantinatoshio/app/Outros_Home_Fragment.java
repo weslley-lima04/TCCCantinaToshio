@@ -1,5 +1,6 @@
 package com.cantinatoshio.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,10 +8,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class Outros_Home_Fragment extends Fragment
 {
+    ListView lista_outros;
+    String [] nomeProduto = {"Combo batata frita e bacon", "Combo Coca e burger", "Combo café e pão de queijo", "Salada"};
+    String [] descProduto = {"Cheddar opcional", "Hamburguer simples", "Acompanha 10 pães de queijo", "Tomate, cebola e alface"};
+    String [] precoProduto = {"10,00", "10,00", "8,00", "6,00"};
+    String [] qtdeProduto = {"0", "0", "0", "0"};
+    int[] imgProduto = {R.drawable.batatabacon, R.drawable.hamburgercoca, R.drawable.paocafe, R.drawable.salada};
 
 
     @Override
@@ -18,6 +30,73 @@ public class Outros_Home_Fragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_outros_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_outros_home, container, false);
+        lista_outros = v.findViewById(R.id.lista_outros);
+        AdapterOutros adapterOutros = new AdapterOutros();
+        lista_outros.setAdapter(adapterOutros);
+
+        //click
+        lista_outros.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Intent intent = new Intent(getContext(), ClickDocesActivity.class);
+                intent.putExtra("nomeProduto", nomeProduto[i]);
+                intent.putExtra("descProduto", descProduto[i]);
+                intent.putExtra("precoProduto", precoProduto[i]);
+                intent.putExtra("qtdeProduto", qtdeProduto[i]);
+                intent.putExtra("imgProduto", imgProduto[i]);
+                startActivity(intent);
+            }
+        });
+
+
+
+        return v;
+    }
+
+    private class AdapterOutros extends BaseAdapter
+    {
+        @Override
+        public int getCount()
+        {
+            return nomeProduto.length;
+        }
+
+        @Override
+        public Object getItem(int i)
+        {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i)
+        {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup)
+        {
+            TextView txtnomeProduto, txtdescProduto, txtprecoProduto, txtqtdeProduto;
+            ImageView modelimgProduto;
+            View v = getLayoutInflater().inflate(R.layout.modelo_produtos, null);
+
+            //produtoCardView = v.findViewById(R.id.cardProduto);
+            txtnomeProduto = v.findViewById(R.id.nomeProduto);
+            txtdescProduto = v.findViewById(R.id.descProduto);
+            txtprecoProduto = v.findViewById(R.id.preco);
+            txtqtdeProduto = v.findViewById(R.id.qtdProduto);
+            modelimgProduto = v.findViewById(R.id.imgProduto);
+
+            txtnomeProduto.setText(nomeProduto[i]);
+            txtdescProduto.setText(descProduto[i]);
+            txtprecoProduto.setText(precoProduto[i]);
+            txtqtdeProduto.setText(qtdeProduto[i]);
+            modelimgProduto.setImageResource(imgProduto[i]);
+
+            return v;
+        }
     }
 }

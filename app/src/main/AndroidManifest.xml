@@ -9,6 +9,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Light.CantinaToshio">
         <activity
+            android:name=".ClickDocesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CadastroActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ClickPedidosActivity"
             android:exported="false" />
         <activity

@@ -3,17 +3,22 @@ package com.cantinatoshio.app;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity
 {
+    Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PedidosFragment pedidosFragment = new PedidosFragment();
@@ -27,8 +32,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         //parte do bottom navigation
+
         bottomNavigationView = findViewById(R.id.btnNav);
-        getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, homeFragment).commit(); //iniciar na home
+        callFragment(homeFragment); //iniciar na home
+        //toolbar = findViewById(R.id.mainToolbar);
+       // setSupportActionBar(toolbar);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()
         {
@@ -53,7 +61,10 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+    }
 
-
+    public void callFragment(Fragment fragment)
+    {
+        getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, fragment).commit();
     }
 }

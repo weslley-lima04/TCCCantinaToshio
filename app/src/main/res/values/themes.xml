@@ -11,7 +11,7 @@
     <style name="Theme.Light.CantinaToshio" parent="Theme.MaterialComponents.DayNight">>
         <!-- Primary brand color. -->
         <item name="android:windowActionBar">false</item>
-        <item name="colorPrimary">#bfa600</item>
+        <item name="colorPrimary">#ffd200</item>
         <item name="colorPrimaryVariant">#bf8500</item>
         <item name="colorOnPrimary">#fff</item>
 

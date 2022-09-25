@@ -1,5 +1,6 @@
 package com.cantinatoshio.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -48,7 +49,13 @@ public class Salgados_Home_Fragment extends Fragment
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
             {
-                Toast.makeText(getContext(), "Funcionando", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ClickDocesActivity.class);
+                intent.putExtra("nomeProduto", nomeProduto[i]);
+                intent.putExtra("descProduto", descProduto[i]);
+                intent.putExtra("precoProduto", precoProduto[i]);
+                intent.putExtra("qtdeProduto", qtdeProduto[i]);
+                intent.putExtra("imgProduto", imgProduto[i]);
+                startActivity(intent);
             }
         });
         //teste
@@ -89,7 +96,7 @@ public class Salgados_Home_Fragment extends Fragment
 
             //produtoCardView = v.findViewById(R.id.cardProduto);
             txtnomeProduto = v.findViewById(R.id.nomeProduto);
-            txtdescProduto = v.findViewById(R.id.descricao);
+            txtdescProduto = v.findViewById(R.id.descProduto);
             txtprecoProduto = v.findViewById(R.id.preco);
             txtqtdeProduto = v.findViewById(R.id.qtdProduto);
             modelimgProduto = v.findViewById(R.id.imgProduto);

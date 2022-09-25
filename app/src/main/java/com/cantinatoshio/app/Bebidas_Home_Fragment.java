@@ -1,5 +1,6 @@
 package com.cantinatoshio.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,6 +36,22 @@ public class Bebidas_Home_Fragment extends Fragment
         AdapterBebidas adapterBebidas = new AdapterBebidas();
         lista_bebidas.setAdapter(adapterBebidas);
 
+        //click
+
+        lista_bebidas.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                Intent intent = new Intent(getContext(), ClickDocesActivity.class);
+                intent.putExtra("nomeProduto", nomeProduto[i]);
+                intent.putExtra("descProduto", descProduto[i]);
+                intent.putExtra("precoProduto", precoProduto[i]);
+                intent.putExtra("qtdeProduto", qtdeProduto[i]);
+                intent.putExtra("imgProduto", imgProduto[i]);
+                startActivity(intent);
+            }
+        });
 
 
         return v;
@@ -68,7 +86,7 @@ public class Bebidas_Home_Fragment extends Fragment
 
             //produtoCardView = v.findViewById(R.id.cardProduto);
             txtnomeProduto = v.findViewById(R.id.nomeProduto);
-            txtdescProduto = v.findViewById(R.id.descricao);
+            txtdescProduto = v.findViewById(R.id.descProduto);
             txtprecoProduto = v.findViewById(R.id.preco);
             txtqtdeProduto = v.findViewById(R.id.qtdProduto);
             modelimgProduto = v.findViewById(R.id.imgProduto);

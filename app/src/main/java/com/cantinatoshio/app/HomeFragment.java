@@ -25,12 +25,12 @@ public class HomeFragment extends Fragment
 
         TabLayout tabLayout;
         ViewPager2 viewPager2;
-        MyViewPagerAdapter myViewPagerAdapter;
+        TabAdapter myViewPagerAdapter;
 
         //parte do tab layout
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager2 = view.findViewById(R.id.viewPager);
-        myViewPagerAdapter = new MyViewPagerAdapter(requireActivity());
+        myViewPagerAdapter = new TabAdapter(requireActivity());
         viewPager2.setAdapter(myViewPagerAdapter);
 
 

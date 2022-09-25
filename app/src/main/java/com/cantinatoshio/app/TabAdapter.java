@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class MyViewPagerAdapter extends FragmentStateAdapter
+public class TabAdapter extends FragmentStateAdapter
 {
-    public MyViewPagerAdapter(@NonNull FragmentActivity fragmentActivity)
+    public TabAdapter(@NonNull FragmentActivity fragmentActivity)
     {
         super(fragmentActivity);
     }
@@ -16,9 +16,8 @@ public class MyViewPagerAdapter extends FragmentStateAdapter
     @Override
     public Fragment createFragment(int position)
     {
-        switch (position){
-            case 0:
-                return new Doces_Home_Fragment();
+        switch (position)
+        {
             case 1:
                 return new Bebidas_Home_Fragment();
             case 2:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,15 +8,25 @@
     android:orientation="vertical"
     tools:context=".PerfilFragment">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_wave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/txtUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/poppinsbold"
         android:gravity="center"
         android:text="Usuário"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txtAcessesuaconta" />
 
     <TextView
         android:id="@+id/txtAcessesuaconta"
@@ -26,81 +36,120 @@
         android:fontFamily="@font/poppinsregular"
         android:gravity="center"
         android:text="Acesse sua conta"
-        android:textSize="20sp" />
+        android:textSize="20sp"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/txtUsuario" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toBottomOf="@id/txtAcessesuaconta"
+        android:id="@+id/constraintInputs"
         android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="35dp"
         android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginBottom="35dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
         <TextView
             android:id="@+id/txtNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
             android:fontFamily="@font/manjaribold"
             android:padding="5dp"
             android:text="Nome"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/UserName"
+            app:layout_constraintTop_toTopOf="@id/constraintInputs"/>
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/UserName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:background="@drawable/border"
-
+            android:autofillHints="name"
+            android:elevation="1dp"
             android:fontFamily="@font/poppinsregular"
-            android:padding="18dp"
-            android:text="Manuel Silva" />
+            android:hint="João da Silva"
+            android:inputType="textPersonName"
+            android:lines="1"
+            android:maxLines="1"
+            app:boxStrokeColor="#9c9c9c"
+            app:hintTextColor="#9c9c9c"
+            app:layout_constraintBottom_toTopOf="@id/txtSenha"
+            app:layout_constraintTop_toBottomOf="@id/txtNome">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsregular" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
-            android:id="@+id/txtRM"
+            android:id="@+id/txtSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/manjaribold"
             android:padding="5dp"
-            android:text="RM"
+            android:text="Senha"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/UserPass"
+            app:layout_constraintTop_toBottomOf="@id/UserName" />
 
-        <EditText
-            android:id="@+id/edtRM"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/UserPass"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:background="@drawable/border"
-
+            android:autofillHints="password"
+            android:elevation="1dp"
             android:fontFamily="@font/poppinsregular"
-            android:padding="18dp"
-            android:text="12345" />
+            android:hint="12345"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
+            app:boxStrokeColor="#9c9c9c"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="#9c9c9c"
+            app:layout_constraintBottom_toTopOf="@id/btnLogar"
+            app:layout_constraintTop_toBottomOf="@id/txtSenha">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinsregular" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnPedir"
+            android:id="@+id/btnLogar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/btnborder"
-            android:elevation="2dp"
             android:fontFamily="@font/poppinssemibold"
             android:padding="10dp"
-            android:text="Pedir!"
+            android:text="Entrar!"
             android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/UserPass" />
 
-    </LinearLayout>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/txtSemConta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Não tenho uma conta"
+            app:layout_constraintStart_toStartOf="@id/btnLogar"
+            app:layout_constraintTop_toBottomOf="@id/btnLogar" />
 
-</RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

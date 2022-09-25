@@ -22,7 +22,7 @@ public class Doces_Home_Fragment extends Fragment
 
     String [] nomeProduto = {"Fatia de bolo", "Brigadeiro", "Mousse de chocolate"};
     String [] descProduto = {"Bolo de chocolate com morango", "Chocolate com granulados", "Mousse de chocolate"};
-    String [] precoProduto = {"6,00", "2,00", "10,00"};
+    String [] precoProduto = {"6.00", "2.00", "10.00"};
     String [] qtdeProduto = {"0", "0", "0"};
     int[] imgProduto = {R.drawable.bolo, R.drawable.brigadeiro, R.drawable.mousse};
 

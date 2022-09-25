@@ -17,18 +17,21 @@ import android.widget.TextView;
 
 public class Outros_Home_Fragment extends Fragment
 {
+
+
     ListView lista_outros;
     String [] nomeProduto = {"Combo batata frita e bacon", "Combo Coca e burger", "Combo café e pão de queijo", "Salada"};
     String [] descProduto = {"Cheddar opcional", "Hamburguer simples", "Acompanha 10 pães de queijo", "Tomate, cebola e alface"};
-    String [] precoProduto = {"10,00", "10,00", "8,00", "6,00"};
+    String [] precoProduto = {"10.00", "10.00", "8.00", "6.00"};
     String [] qtdeProduto = {"0", "0", "0", "0"};
     int[] imgProduto = {R.drawable.batatabacon, R.drawable.hamburgercoca, R.drawable.paocafe, R.drawable.salada};
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_outros_home, container, false);
         lista_outros = v.findViewById(R.id.lista_outros);
@@ -50,7 +53,6 @@ public class Outros_Home_Fragment extends Fragment
                 startActivity(intent);
             }
         });
-
 
 
         return v;

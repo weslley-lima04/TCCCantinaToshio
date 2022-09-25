@@ -22,7 +22,7 @@ public class Bebidas_Home_Fragment extends Fragment
 
     String [] nomeProduto = {"Suco natural", "Refrigerante", "Água"};
     String [] descProduto = {"Vários sabores", "Vários sabores", "Sem gás"};
-    String [] precoProduto = {"5,00", "5,00", "2,00"};
+    String [] precoProduto = {"5.00", "5.00", "2.00"};
     String [] qtdeProduto = {"0", "0", "0"};
     int[] imgProduto = {R.drawable.suco, R.drawable.refri, R.drawable.agua};
 

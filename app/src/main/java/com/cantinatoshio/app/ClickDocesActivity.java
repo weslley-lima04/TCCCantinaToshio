@@ -46,7 +46,7 @@ public class ClickDocesActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //mudar quantidade e valor
+        //mudar quantidade e valor. Funcionando para todas as telas (não devia)
         //inicializando valor do produto
         double valorProd = Double.parseDouble(String.valueOf(precoProduto.getText()));
 

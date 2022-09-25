@@ -26,7 +26,7 @@ public class Salgados_Home_Fragment extends Fragment
 
     String [] nomeProduto = {"Coxinha", "Pão de Queijo", "Misto Quente"};
     String [] descProduto = {"Frango com catupiry", "Quente e crocante", "Com queijo e presunto"};
-    String [] precoProduto = {"6,00", "2,50", "6,00"};
+    String [] precoProduto = {"6.00", "2.50", "6.00"};
     String [] qtdeProduto = {"0", "0", "0"};
     int[] imgProduto = {R.drawable.coxinha, R.drawable.fpaodequeijo, R.drawable.misto};
 

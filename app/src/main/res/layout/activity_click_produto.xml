@@ -5,8 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wave"
-    tools:context=".ClickDocesActivity">
+    android:fitsSystemWindows="true"
+    >
 
+    <!-- tools:context=".ClickDocesActivity"-->
 
     <ImageView
         android:id="@+id/imagemProduto"
@@ -65,7 +67,7 @@
         android:fontFamily="@font/poppinssemibold"
         android:text="Hamburger"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/LinearMenosMais" />
@@ -86,7 +88,7 @@
         android:fontFamily="@font/poppinssemibold"
         android:text="R$"
         android:textColor="#050505"
-        android:textSize="30sp"
+        android:textSize="20sp"
  />
 
     <TextView
@@ -94,30 +96,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Preco"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         />
     </LinearLayout>
 
-        <TextView
-            app:layout_constraintTop_toBottomOf="@id/LinearPreco"
-            android:id="@+id/descProduto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
-            android:padding="10dp"
-            android:text="Descrição"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/contentDescricao"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/descProduto"
-        app:layout_constraintStart_toStartOf="@id/descProduto"
+        app:layout_constraintTop_toBottomOf="@id/LinearPreco"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:text="Descricao do produto"

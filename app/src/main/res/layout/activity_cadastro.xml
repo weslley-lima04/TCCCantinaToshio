@@ -8,6 +8,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginEnd="35dp"
     android:layout_marginBottom="10dp"
+    android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".CadastroActivity">
@@ -31,7 +32,7 @@
             android:padding="5dp"
             android:text="Nome"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/UserName"
@@ -59,7 +60,7 @@
             android:padding="5dp"
             android:text="Senha"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtSenha"
@@ -84,7 +85,7 @@
             android:padding="5dp"
             android:text="Email"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/Email"
@@ -113,7 +114,7 @@
             android:padding="5dp"
             android:text="Celular"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/edtCelular"

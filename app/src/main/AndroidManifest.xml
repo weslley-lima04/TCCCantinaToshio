@@ -9,6 +9,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Light.CantinaToshio">
         <activity
+            android:name=".CarrinhoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ClickDocesActivity"
             android:exported="false">
             <meta-data

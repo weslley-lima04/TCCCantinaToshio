@@ -47,4 +47,12 @@ public class Produto
         this.qtdeProduto = qtdeProduto;
     }
 
+    public Produto(String descProduto, String nomeProduto, double precoProduto, int qtdeProduto)
+    {
+        this.descProduto = descProduto;
+        this.nomeProduto = nomeProduto;
+        this.precoProduto = precoProduto;
+        this.qtdeProduto = qtdeProduto;
+    }
+
 }

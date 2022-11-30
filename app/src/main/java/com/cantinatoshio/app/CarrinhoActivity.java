@@ -69,30 +69,12 @@ public class CarrinhoActivity extends AppCompatActivity
         while (cursor.moveToNext())
         {
             String titulo = cursor.getString(2);
-            switch (titulo)
-            {
-                case "Água":
-                    img = R.drawable.agua;
-                    break;
-                case "Bolo":
-                    img = R.drawable.bolo;
-                    break;
-                case "Refrigerante":
-                    img = R.drawable.refri;
-                    break;
-                case "Salada":
-                    img = R.drawable.salada;
-                    break;
-                case "Suco":
-                    img = R.drawable.suco;
-                    break;
-            }
 
             //calculando total
             calculaTotal = calculaTotal + Double.parseDouble(cursor.getString(4));
 
             //1 ID, 2 titulo, 3 qtd, 4 preco
-            Produto produto = new Produto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), img);
+            Produto produto = new Produto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), selecionaImagem(titulo));
             carrinho.add(produto);
         }
 
@@ -172,6 +154,55 @@ public class CarrinhoActivity extends AppCompatActivity
         startActivity(getIntent());
         overridePendingTransition(0, 0);
     }
+
+    private int selecionaImagem(String nome)
+    {
+        int img = 0;
+        switch (nome)
+        {
+            case "Água":
+                img = R.drawable.agua;
+                break;
+            case "Refrigerante":
+                img = R.drawable.refri;
+                break;
+            case "Salada":
+                img = R.drawable.salada;
+                break;
+            case "Fatia de bolo":
+                img = R.drawable.bolo;
+                break;
+            case "Brigadeiro":
+                img = R.drawable.brigadeiro;
+                break;
+            case "Mousse":
+                img = R.drawable.mousse;
+                break;
+            case "Suco Natural":
+                img = R.drawable.suco;
+                break;
+            case "Coxinha":
+                img = R.drawable.coxinha;
+                break;
+            case "Pão de Queijo":
+                img = R.drawable.fpaodequeijo;
+                break;
+            case "Misto Quente":
+                img = R.drawable.misto;
+                break;
+            case "Combo batata frita e bacon":
+                img = R.drawable.batatabacon;
+                break;
+            case "Combo Coca e burger":
+                img = R.drawable.hamburgercoca;
+                break;
+            case "Combo café e pão de queijo":
+                img = R.drawable.paocafe;
+                break;
+        }
+        return img;
+    }
+
 
     //adaptador interno
     private class AdapterCarrinho extends RecyclerView.Adapter<AdapterCarrinho.ViewHolder>

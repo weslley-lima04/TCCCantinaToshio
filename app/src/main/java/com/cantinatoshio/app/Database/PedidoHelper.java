@@ -127,14 +127,11 @@ public class PedidoHelper extends SQLiteOpenHelper
         }
     }
 
-    public void removerItem(String id, View view)
+    public void removerItem(String id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "DELETE FROM " + PedidoTabela.EntradaPedido.TABLE_NAME + " WHERE " + PedidoTabela.EntradaPedido.COLUMN_ID + " = " + id;
         db.execSQL(sql);
-        Snackbar snackbar = Snackbar.make(view, "Item removido!", Snackbar.LENGTH_LONG);
-        snackbar.setBackgroundTint(Color.rgb(255, 174, 1));
-        snackbar.show();
     }
 
 }

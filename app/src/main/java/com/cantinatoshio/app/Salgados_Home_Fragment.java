@@ -1,32 +1,30 @@
 package com.cantinatoshio.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class Salgados_Home_Fragment extends Fragment
 {
 
-    ListView lista_salgados;
-
-    String [] nomeProduto = {"Coxinha", "Pão de Queijo", "Misto Quente"};
-    String [] descProduto = {"Frango com catupiry", "Quente e crocante", "Com queijo e presunto"};
-    String [] precoProduto = {"6.00", "2.50", "6.00"};
-    String [] qtdeProduto = {"0", "0", "0"};
-    int[] imgProduto = {R.drawable.coxinha, R.drawable.fpaodequeijo, R.drawable.misto};
-
+    RecyclerView lista_salgados;
+    ArrayList<Produto> salgados;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,79 +33,98 @@ public class Salgados_Home_Fragment extends Fragment
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_salgados_home, container, false);
         lista_salgados = view.findViewById(R.id.lista_salgados);
-        AdapterSalgados adapterSalgados = new AdapterSalgados();
+        salgados = new ArrayList<>();
+
+        salgados.add(new Produto("6","Coxinha", "Frango com catupiry", "6.00", "salgado", R.drawable.coxinha));
+        salgados.add(new Produto("7","Pão de Queijo", "Quente e crocante", "2.50", "salgado" ,R.drawable.fpaodequeijo));
+        salgados.add(new Produto("8", "Misto Quente", "Com queijo e presunto", "6.00", "salgado" ,R.drawable.misto));
+
+        AdapterSalgados adapterSalgados = new AdapterSalgados(getContext(), salgados);
+
+        lista_salgados.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        lista_salgados.hasFixedSize();
+
         lista_salgados.setAdapter(adapterSalgados);
-
-
-        //aqui vem o clique pra nova janela
-
-        lista_salgados.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Intent intent = new Intent(getContext(), ClickDocesActivity.class);
-                intent.putExtra("nomeProduto", nomeProduto[i]);
-                intent.putExtra("descProduto", descProduto[i]);
-                intent.putExtra("precoProduto", precoProduto[i]);
-                intent.putExtra("qtdeProduto", qtdeProduto[i]);
-                intent.putExtra("imgProduto", imgProduto[i]);
-                startActivity(intent);
-            }
-        });
-        //teste
 
 
         return view;
     }
-
-    public class AdapterSalgados extends BaseAdapter
+    private class AdapterSalgados extends RecyclerView.Adapter<AdapterSalgados.ViewHolder>
     {
+        private ArrayList<Produto> salgados;
+        private Context context;
 
-        @Override
-        public int getCount()
+        public AdapterSalgados(Context context, ArrayList<Produto> salgados)
         {
-            return imgProduto.length;
+            this.salgados = salgados;
+            this.context = context;
+        }
+
+        @NonNull
+        @Override
+        public AdapterSalgados.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+        {
+            View view;
+            LayoutInflater inflater = LayoutInflater.from(context);
+            view = inflater.inflate(R.layout.modelo_feed, parent, false);
+            return new AdapterSalgados.ViewHolder(view);
         }
 
         @Override
-        public Object getItem(int i)
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position)
         {
-            return null;
+            holder.idProduto.setText(salgados.get(position).getIdProduto());
+            holder.nomeProduto.setText(salgados.get(position).getNomeProduto());
+            holder.descProduto.setText(salgados.get(position).getDescProduto());
+            holder.precoProduto.setText(salgados.get(position).getPrecoProduto());
+            //holder.mqtdProduto.setText(doces.get(position).getQtdeProduto());
+            holder.imgProduto.setImageResource(salgados.get(position).getImgProduto());
+
+            holder.cardModelo.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    Intent intent = new Intent(context, ClickProdutoActivity.class);
+                    intent.putExtra("ID", salgados.get(position).getIdProduto());
+                    intent.putExtra("Titulo", salgados.get(position).getNomeProduto());
+                    intent.putExtra("Descricao", salgados.get(position).getDescProduto());
+                    intent.putExtra("Imagem", salgados.get(position).getImgProduto());
+                    intent.putExtra("Preco", salgados.get(position).getPrecoProduto());
+
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+            });
+
         }
 
         @Override
-        public long getItemId(int i)
+        public int getItemCount()
         {
-            return 0;
+            return salgados.size();
         }
 
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup)
+        public class ViewHolder extends RecyclerView.ViewHolder
         {
+            CardView cardModelo;
+            TextView descProduto, nomeProduto, precoProduto, idProduto;
+            ImageView imgProduto;
 
-            TextView txtnomeProduto, txtdescProduto, txtprecoProduto, txtqtdeProduto;
-            CardView produtoCardView;
-            ImageView modelimgProduto;
-            View v = getLayoutInflater().inflate(R.layout.modelo_feed, null);
-
-            //produtoCardView = v.findViewById(R.id.cardProduto);
-            txtnomeProduto = v.findViewById(R.id.nomeProduto);
-            txtdescProduto = v.findViewById(R.id.descProduto);
-            txtprecoProduto = v.findViewById(R.id.precoProduto);
-            txtqtdeProduto = v.findViewById(R.id.qtdProduto);
-            modelimgProduto = v.findViewById(R.id.imgProduto);
-
-            txtnomeProduto.setText(nomeProduto[i]);
-            txtdescProduto.setText(descProduto[i]);
-            txtprecoProduto.setText(precoProduto[i]);
-            txtqtdeProduto.setText(qtdeProduto[i]);
-            modelimgProduto.setImageResource(imgProduto[i]);
-
-
-            return v;
+            public ViewHolder(View view)
+            {
+                super(view);
+                idProduto = itemView.findViewById(R.id.idProduto);
+                cardModelo = itemView.findViewById(R.id.cardProduto);
+                nomeProduto = itemView.findViewById(R.id.nomeProduto);
+                descProduto = itemView.findViewById(R.id.descProduto);
+                precoProduto = itemView.findViewById(R.id.precoProduto);
+                imgProduto = itemView.findViewById(R.id.imgProduto);
+            }
         }
     }
+
+
 
 
 }

@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (getSupportActionBar() != null)
+        {
+            getSupportActionBar().hide();
+        }
+
+
         btnCart = findViewById(R.id.btnCart);
 
         //parte do bottom navigation

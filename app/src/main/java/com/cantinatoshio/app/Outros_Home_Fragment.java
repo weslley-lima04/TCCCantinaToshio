@@ -1,104 +1,131 @@
 package com.cantinatoshio.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class Outros_Home_Fragment extends Fragment
 {
 
 
-    ListView lista_outros;
-    String [] nomeProduto = {"Combo batata frita e bacon", "Combo Coca e burger", "Combo café e pão de queijo", "Salada"};
-    String [] descProduto = {"Cheddar opcional", "Hamburguer simples", "Acompanha 10 pães de queijo", "Tomate, cebola e alface"};
-    String [] precoProduto = {"10.00", "10.00", "8.00", "6.00"};
-    String [] qtdeProduto = {"0", "0", "0", "0"};
-    int[] imgProduto = {R.drawable.batatabacon, R.drawable.hamburgercoca, R.drawable.paocafe, R.drawable.salada};
+    RecyclerView lista_outros;
+    ArrayList<Produto> outros;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
 
-
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_outros_home, container, false);
         lista_outros = v.findViewById(R.id.lista_outros);
-        AdapterOutros adapterOutros = new AdapterOutros();
+        outros = new ArrayList<>();
+
+        outros.add(new Produto("9","Combo batata frita e bacon", "Cheddar opcional", "10.00", "outros", R.drawable.batatabacon));
+        outros.add(new Produto("10","Combo Coca e burger", "Hamburguer simples", "10.0", "outros" ,R.drawable.hamburgercoca));
+        outros.add(new Produto("11", "Combo café e pão de queijo", "Acompanha 10 pães de queijo", "8.00", "outros" ,R.drawable.paocafe));
+        outros.add(new Produto("12", "Salada", "Tomate, cebola e alface", "6.00", "outros" ,R.drawable.salada));
+
+        AdapterOutros adapterOutros = new AdapterOutros(getContext(), outros);
+
+        lista_outros.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        lista_outros.hasFixedSize();
+
         lista_outros.setAdapter(adapterOutros);
-
-        //click
-        lista_outros.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
-                Intent intent = new Intent(getContext(), ClickDocesActivity.class);
-                intent.putExtra("nomeProduto", nomeProduto[i]);
-                intent.putExtra("descProduto", descProduto[i]);
-                intent.putExtra("precoProduto", precoProduto[i]);
-                intent.putExtra("qtdeProduto", qtdeProduto[i]);
-                intent.putExtra("imgProduto", imgProduto[i]);
-                startActivity(intent);
-            }
-        });
-
 
         return v;
     }
 
-    private class AdapterOutros extends BaseAdapter
+    private class AdapterOutros extends RecyclerView.Adapter<AdapterOutros.ViewHolder>
     {
-        @Override
-        public int getCount()
+        private ArrayList<Produto> outros;
+        private Context context;
+
+        public AdapterOutros(Context context, ArrayList<Produto> outros)
         {
-            return nomeProduto.length;
+            this.outros = outros;
+            this.context = context;
+        }
+
+        @NonNull
+        @Override
+        public AdapterOutros.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+        {
+            View view;
+            LayoutInflater inflater = LayoutInflater.from(context);
+            view = inflater.inflate(R.layout.modelo_feed, parent, false);
+            return new AdapterOutros.ViewHolder(view);
         }
 
         @Override
-        public Object getItem(int i)
+        public void onBindViewHolder(@NonNull AdapterOutros.ViewHolder holder, int position)
         {
-            return null;
+            holder.idProduto.setText(outros.get(position).getIdProduto());
+            holder.nomeProduto.setText(outros.get(position).getNomeProduto());
+            holder.descProduto.setText(outros.get(position).getDescProduto());
+            holder.precoProduto.setText(outros.get(position).getPrecoProduto());
+            //holder.mqtdProduto.setText(doces.get(position).getQtdeProduto());
+            holder.imgProduto.setImageResource(outros.get(position).getImgProduto());
+
+            holder.cardModelo.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    Intent intent = new Intent(context, ClickProdutoActivity.class);
+                    intent.putExtra("ID", outros.get(position).getIdProduto());
+                    intent.putExtra("Titulo", outros.get(position).getNomeProduto());
+                    intent.putExtra("Descricao", outros.get(position).getDescProduto());
+                    intent.putExtra("Imagem", outros.get(position).getImgProduto());
+                    intent.putExtra("Preco", outros.get(position).getPrecoProduto());
+
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+            });
+
         }
 
         @Override
-        public long getItemId(int i)
+        public int getItemCount()
         {
-            return 0;
+            return outros.size();
         }
 
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup)
+        public class ViewHolder extends RecyclerView.ViewHolder
         {
-            TextView txtnomeProduto, txtdescProduto, txtprecoProduto, txtqtdeProduto;
-            ImageView modelimgProduto;
-            View v = getLayoutInflater().inflate(R.layout.modelo_feed, null);
+            CardView cardModelo;
+            TextView descProduto, nomeProduto, precoProduto, idProduto;
+            ImageView imgProduto;
 
-            //produtoCardView = v.findViewById(R.id.cardProduto);
-            txtnomeProduto = v.findViewById(R.id.nomeProduto);
-            txtdescProduto = v.findViewById(R.id.descProduto);
-            txtprecoProduto = v.findViewById(R.id.precoProduto);
-            txtqtdeProduto = v.findViewById(R.id.qtdProduto);
-            modelimgProduto = v.findViewById(R.id.imgProduto);
-
-            txtnomeProduto.setText(nomeProduto[i]);
-            txtdescProduto.setText(descProduto[i]);
-            txtprecoProduto.setText(precoProduto[i]);
-            txtqtdeProduto.setText(qtdeProduto[i]);
-            modelimgProduto.setImageResource(imgProduto[i]);
-
-            return v;
+            public ViewHolder(View view)
+            {
+                super(view);
+                idProduto = itemView.findViewById(R.id.idProduto);
+                cardModelo = itemView.findViewById(R.id.cardProduto);
+                nomeProduto = itemView.findViewById(R.id.nomeProduto);
+                descProduto = itemView.findViewById(R.id.descProduto);
+                precoProduto = itemView.findViewById(R.id.precoProduto);
+                imgProduto = itemView.findViewById(R.id.imgProduto);
+            }
         }
     }
+
+
+
 }

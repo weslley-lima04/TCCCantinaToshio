@@ -13,13 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Light.CantinaToshio">
         <activity
-            android:name=".CarrinhoActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".ClickDocesActivity"
             android:exported="false">
             <meta-data
@@ -28,6 +21,20 @@
         </activity>
         <activity
             android:name=".CadastroActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CarrinhoActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PedidoRealizado"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

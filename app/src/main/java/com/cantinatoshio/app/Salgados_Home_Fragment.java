@@ -14,9 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
 
 
 public class Salgados_Home_Fragment extends Fragment
@@ -92,12 +89,12 @@ public class Salgados_Home_Fragment extends Fragment
             TextView txtnomeProduto, txtdescProduto, txtprecoProduto, txtqtdeProduto;
             CardView produtoCardView;
             ImageView modelimgProduto;
-            View v = getLayoutInflater().inflate(R.layout.modelo_produtos, null);
+            View v = getLayoutInflater().inflate(R.layout.modelo_feed, null);
 
             //produtoCardView = v.findViewById(R.id.cardProduto);
             txtnomeProduto = v.findViewById(R.id.nomeProduto);
             txtdescProduto = v.findViewById(R.id.descProduto);
-            txtprecoProduto = v.findViewById(R.id.preco);
+            txtprecoProduto = v.findViewById(R.id.precoProduto);
             txtqtdeProduto = v.findViewById(R.id.qtdProduto);
             modelimgProduto = v.findViewById(R.id.imgProduto);
 

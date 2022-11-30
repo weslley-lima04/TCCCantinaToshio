@@ -1,7 +1,6 @@
 package com.cantinatoshio.app;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,68 +8,78 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+
+import com.cantinatoshio.app.Database.PedidoHelper;
+
+import java.util.ArrayList;
 
 public class AdapterCarrinho extends RecyclerView.Adapter<AdapterCarrinho.ViewHolder>
 {
-    private Context context;
-    private List<Carrinho> carrinhoList;
 
-    public AdapterCarrinho(Context context, List<Carrinho> carrinhoList)
+    private ArrayList<Produto> carrinho;
+    private Context context;
+
+   // public AdapterCarrinho(){}
+
+    public AdapterCarrinho(Context context, ArrayList<Produto> carrinho)
     {
+        this.carrinho = carrinho;
         this.context = context;
-        this.carrinhoList = carrinhoList;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view;
         LayoutInflater inflater = LayoutInflater.from(context);
         view = inflater.inflate(R.layout.modelo_produtos, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
-        //terminar
+        holder.midProduto.setText(carrinho.get(position).getIdProduto());
+        holder.mnomeProduto.setText(carrinho.get(position).getNomeProduto());
+        holder.mdescProduto.setText(carrinho.get(position).getDescProduto());
+        holder.mprecoProduto.setText(carrinho.get(position).getPrecoProduto());
+        holder.mqtdProduto.setText(carrinho.get(position).getQtdeProduto());
+        holder.mImageProduto.setImageResource(carrinho.get(position).getImgProduto());
     }
 
     @Override
-    public int getItemCount() {
-        return carrinhoList.size();
+    public int getItemCount()
+    {
+        return carrinho.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-
-        CardView cardProduto;
-        TextView descricao, titulo, preco, qtd;
-        ImageView imgProduto;
-
-
-
+        TextView mnomeProduto, mdescProduto, mprecoProduto, mqtdProduto, midProduto;
+        ImageView mImageProduto, mdeleteProduto;
 
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            cardProduto = itemView.findViewById(R.id.cardViewt);
-            descricao = itemView.findViewById(R.id.descProduto);
-            titulo = itemView.findViewById(R.id.nomeProduto);
-            preco = itemView.findViewById(R.id.precoProduto);
-            qtd = itemView.findViewById(R.id.qtdProduto);
-            imgProduto = itemView.findViewById(R.id.imgProduto);
+            midProduto = itemView.findViewById(R.id.IDproduto_cart);
+            mnomeProduto = itemView.findViewById(R.id.nomeProduto);
+            mdescProduto = itemView.findViewById(R.id.descProduto);
+            mprecoProduto = itemView.findViewById(R.id.precoProduto);
+            mqtdProduto = itemView.findViewById(R.id.qtdProduto);
+            mImageProduto = itemView.findViewById(R.id.imgProduto);
+            mdeleteProduto = itemView.findViewById(R.id.delete_item);
+
+            mdeleteProduto.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    new PedidoHelper(context.getApplicationContext()).removerItem(midProduto.getText().toString(), view);
+                }
+            });
         }
     }
 }

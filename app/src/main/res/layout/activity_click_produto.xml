@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wave"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
     <!-- tools:context=".ClickDocesActivity"-->
 
     <ImageView
         android:id="@+id/imagemProduto"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/coxinha"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:src="@drawable/bghamburgao" />
+        android:layout_height="0dp"
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
 
-
+        >
 
         <LinearLayout
-
-            android:layout_marginTop="20dp"
             android:id="@+id/LinearMenosMais"
-            app:layout_constraintTop_toBottomOf="@id/imagemProduto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/imagemProduto">
 
             <ImageView
                 android:id="@+id/clickProdutobtnMenos"
@@ -60,82 +73,80 @@
                 android:src="@drawable/ic_baseline_add" />
         </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtNomeProduto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toTopOf="@id/LinearPreco"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="Hamburger"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/LinearMenosMais" />
+        <TextView
+            android:id="@+id/txtNomeProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/poppinssemibold"
 
-    <LinearLayout
-        android:id="@+id/LinearPreco"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtNomeProduto"
-        android:orientation="horizontal">
+            android:text="Hamburger"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/LinearPreco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LinearMenosMais" />
 
-    <TextView
-        android:id="@+id/txtRS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinssemibold"
-        android:text="R$"
-        android:textColor="#050505"
-        android:textSize="20sp"
- />
+        <LinearLayout
+            android:id="@+id/LinearPreco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtNomeProduto">
 
-    <TextView
-        android:id="@+id/valorProduto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preco"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        />
+            <TextView
+                android:id="@+id/txtRS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinssemibold"
+                android:text="R$ "
+                android:textColor="#050505"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/valorProduto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preco"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/contentDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/borda_desc"
+            android:padding="10dp"
+            android:text="Descricao do produto"
+            android:textAlignment="viewStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LinearPreco"
+
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_border"
+            android:fontFamily="@font/poppinsregular"
+            android:text="Adicionar ao carrinho"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_margin="20dp"
+            />
     </LinearLayout>
-
-
-
-    <TextView
-        android:id="@+id/contentDescricao"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/LinearPreco"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="Descricao do produto"
-        android:textAlignment="viewStart"
-
-        />
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adicionar ao carrinho"
-        android:textColor="@color/black"
-        android:background="@drawable/btn_border"
-        app:layout_constraintTop_toBottomOf="@id/contentDescricao"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:fontFamily="@font/poppinsregular"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

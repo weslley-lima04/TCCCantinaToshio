@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
 
         //chamando lista pedidos
         new Cliente().getPedidosCliente();
-        System.out.println("EXECUTANDO");
+
 
 
         btnCart = findViewById(R.id.btnCart);

@@ -2,8 +2,12 @@ package com.cantinatoshio.app.api;
 
 
 
+import static android.view.View.GONE;
+
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 
 import com.cantinatoshio.app.Cliente;
@@ -24,6 +28,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
     int requestCode;
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
+   // ProgressBar progressBar;
 
     public PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode)
     {
@@ -37,14 +42,14 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
     protected void onPreExecute()
     {
         super.onPreExecute();
-        // progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onPostExecute(String s)
     {
         super.onPostExecute(s);
-        //     progressBar.setVisibility(GONE);
+//            progressBar.setVisibility(GONE);
        try
         {
             JSONObject object = new JSONObject(s);

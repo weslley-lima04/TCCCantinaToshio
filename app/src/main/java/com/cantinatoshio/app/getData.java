@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -20,6 +21,12 @@ public class getData extends Thread
     String id;
     String data = "";
     StringBuilder sb = new StringBuilder();
+    String request;
+
+    public getData(String request)
+    {
+        this.request = request;
+    }
 
 
     @Override
@@ -27,7 +34,7 @@ public class getData extends Thread
     {
 
         try {
-            URL url = new URL(Api.URL_LAST_IDPEDIDO);
+            URL url = new URL(request);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
             //propriedades da conexão
@@ -50,21 +57,45 @@ public class getData extends Thread
             }
             data = sb.toString();
 
-
-            if (!(data.isEmpty()))
+            switch (request)
             {
-                JSONObject jsonObject = new JSONObject(data);
-                JSONArray jsonArray = jsonObject.getJSONArray("LastID");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject ids = jsonArray.getJSONObject(i);
-                    id = ids.getString("IDPedido");
-                    new Pedido().setIdPedido(Integer.parseInt(id));
-                    //System.out.println("SAINDO DA GET DATA");
-                    //System.out.println("SEU ID É " + id);
-                }
+                case Api.URL_LAST_IDPEDIDO:
+                    if (!(data.isEmpty()))
+                    {
+                        JSONObject jsonObject = new JSONObject(data);
+                        JSONArray jsonArray = jsonObject.getJSONArray("LastID");
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+                            JSONObject ids = jsonArray.getJSONObject(i);
+                            id = ids.getString("IDPedido");
+                            new Pedido().setIdPedido(Integer.parseInt(id));
+                            //System.out.println("SAINDO DA GET DATA");
+                            //System.out.println("SEU ID É " + id);
+                        }
+                    }
+                break;
+                case Api.URL_CLIENTE_PEDIDOS:
+                    if(!(data.isEmpty()))
+                    {
+                        System.out.println("SAÍDA DOS DADOS");
+                        System.out.println(data);
+                        ArrayList<Pedido> pedidos = new ArrayList<>();
+                        JSONObject jsonObject = new JSONObject(data);
+                        JSONArray jsonArray = jsonObject.getJSONArray("Pedidos");
+                        for (int i = 0; i < jsonArray.length(); i++)
+                        {
+                            JSONObject obj = jsonArray.getJSONObject(i);
+                            pedidos.add(new Pedido(
+                                    obj.getInt("IDPedido"),
+                                    obj.getInt("IDCliente"),
+                                    obj.getString("DataPedido"),
+                                    obj.getDouble("ValorPedido")
+                            ));
+                        }
+                        new Cliente().setPedidos(pedidos);
+
+                    }
             }
-
-
         }
         catch (IOException | JSONException e)
         {

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cantinatoshio.app.api.Api;
 import com.google.android.material.snackbar.Snackbar;
 import com.cantinatoshio.app.Database.PedidoHelper;
 
@@ -49,7 +50,8 @@ public class CarrinhoActivity extends AppCompatActivity
         btnEnviarPedido = findViewById(R.id.btnEviarPedido);
         totalPedido = findViewById(R.id.totalPedido);
 
-        new getData().start();
+        new getData(Api.URL_LAST_IDPEDIDO).start();
+        new getData(Api.URL_CLIENTE_PEDIDOS).start();
         limpar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -60,6 +62,7 @@ public class CarrinhoActivity extends AppCompatActivity
                 //limpando a tela
 
                 refresh();
+                System.out.println(new Cliente().getPedidos());
             }
         });
 

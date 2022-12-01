@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.cantinatoshio.app.api.Api;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity
         {
             getSupportActionBar().hide();
         }
-
 
         btnCart = findViewById(R.id.btnCart);
 

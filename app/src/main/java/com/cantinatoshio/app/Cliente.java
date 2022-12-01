@@ -1,5 +1,7 @@
 package com.cantinatoshio.app;
 
+import java.util.ArrayList;
+
 public class Cliente
 {
 
@@ -8,6 +10,7 @@ public class Cliente
     String emailCliente;
     String telefoneCliente;
     String senhaCliente;
+    static ArrayList<Pedido> pedidos;
 
 
     public int getIdCliente()
@@ -60,7 +63,13 @@ public class Cliente
         this.senhaCliente = senhaCliente;
     }
 
+    public ArrayList<Pedido> getPedidos()
+    {
+        return pedidos;
+    }
 
-
-
+    public void setPedidos(ArrayList<Pedido> pedidos)
+    {
+        this.pedidos = pedidos;
+    }
 }

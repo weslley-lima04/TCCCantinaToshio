@@ -27,18 +27,6 @@
                 android:text="18/08/2022"
                 android:textColor="#000" />
 
-            <!--
-            <TextView
-                android:id="@+id/txt_horaPedido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_toEndOf="@id/txt_dataPedido"
-                android:text="00:00"
-                android:textColor="#000"
-
-                /> -->
-
             <TextView
                 android:id="@+id/txt_Pedido"
                 android:layout_width="wrap_content"
@@ -66,23 +54,15 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <RatingBar
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toStartOf="@id/txt_Avalie"
-                android:numStars="1"
-                android:rating="1"
-                android:stepSize="1" />
 
             <TextView
-                android:id="@+id/txt_Avalie"
+                android:id="@+id/txtValorPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:text="Avalie o pedido"
+                android:textSize="18sp"
+                android:text="0.00"
                 android:textColor="#bf8500" />
 
 

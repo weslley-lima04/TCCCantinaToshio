@@ -32,17 +32,24 @@ public class PedidosFragment extends Fragment
 {
 
     RecyclerView listapedidos;
+    ArrayList<Pedido> pedidos;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment
-      //new getData(Api.URL_CLIENTE_PEDIDOS).start();
+
       View view = inflater.inflate(R.layout.fragment_pedidos, container, false);
+
       listapedidos = view.findViewById(R.id.lst_pedidos);
-      AdapterPedidos adapterPedidos = new AdapterPedidos(getContext(), new Cliente().getPedidos());
+      pedidos = Cliente.pedidos;
+      if(pedidos.size() == 0)
+      {
+          view = inflater.inflate(R.layout.modelo_empty_pedidos, container, false);
+      }
+
+      AdapterPedidos adapterPedidos = new AdapterPedidos(getContext(), pedidos);
 
       listapedidos.setLayoutManager(new GridLayoutManager(getContext(), 1));
 
@@ -51,7 +58,6 @@ public class PedidosFragment extends Fragment
       listapedidos.setAdapter(adapterPedidos);
 
       //clique pra abrir nova janela
-
 
       return view;
     }
@@ -83,9 +89,10 @@ public class PedidosFragment extends Fragment
         @Override
         public void onBindViewHolder(@NonNull AdapterPedidos.ViewHolder holder, int position)
         {
-            holder.txt_idPedido.setText(pedidos.get(position).getIdPedido());
-            holder.txt_dataPedido.setText(pedidos.get(position).getDataPedido());
-            holder.txtValorPedido.setText((int) pedidos.get(position).getValorPedido());
+            String id  = "#00" + pedidos.get(position).getIdPedido();
+            holder.txt_idPedido.setText(id);
+            holder.txt_dataPedido.setText(pedidos.get(position).getData());
+            holder.txtValorPedido.setText(String.valueOf(pedidos.get(position).getValorPedido()));
 
             holder.cardPedidos.setOnClickListener(new View.OnClickListener()
             {
@@ -93,7 +100,11 @@ public class PedidosFragment extends Fragment
                 public void onClick(View view)
                 {
                     Intent intent = new Intent(context, ClickPedidosActivity.class);
+                    intent.putExtra("IDPedido", id);
+                    intent.putExtra("DataPedido", pedidos.get(position).getData());
+                    intent.putExtra("ValorPedido", String.valueOf(pedidos.get(position).getValorPedido()));
 
+                    context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });
 

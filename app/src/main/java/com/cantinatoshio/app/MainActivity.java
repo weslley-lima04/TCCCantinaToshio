@@ -40,14 +40,17 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().hide();
         }
 
+        //chamando lista pedidos
+        new Cliente().getPedidosCliente();
+        System.out.println("EXECUTANDO");
+
+
         btnCart = findViewById(R.id.btnCart);
 
         //parte do bottom navigation
 
         bottomNavigationView = findViewById(R.id.btnNav);
         callFragment(homeFragment); //iniciar na home
-        //toolbar = findViewById(R.id.mainToolbar);
-       // setSupportActionBar(toolbar);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener()
         {
@@ -87,4 +90,5 @@ public class MainActivity extends AppCompatActivity
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, fragment).commit();
     }
+
 }

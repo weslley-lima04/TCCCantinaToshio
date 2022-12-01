@@ -99,6 +99,7 @@ public class RequestHandler
         } catch (Exception e)
         {
         }
+
         return sb.toString();
     }
 

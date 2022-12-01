@@ -35,7 +35,6 @@ public class CarrinhoActivity extends AppCompatActivity
     TextView totalPedido;
     double calculaTotal = 0;
     String total;
-    int img;
 
 
     @Override
@@ -50,8 +49,7 @@ public class CarrinhoActivity extends AppCompatActivity
         btnEnviarPedido = findViewById(R.id.btnEviarPedido);
         totalPedido = findViewById(R.id.totalPedido);
 
-        new getData(Api.URL_LAST_IDPEDIDO).start();
-        new getData(Api.URL_CLIENTE_PEDIDOS).start();
+        new getData().start();
         limpar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -62,7 +60,6 @@ public class CarrinhoActivity extends AppCompatActivity
                 //limpando a tela
 
                 refresh();
-                System.out.println(new Cliente().getPedidos());
             }
         });
 
@@ -94,12 +91,9 @@ public class CarrinhoActivity extends AppCompatActivity
                 {
                     for (int i = 0; i <=carrinho.size()-1; i++)
                     {
-                        //precisa de um segundo parametro, id pedido, vindo da classe Pedido
                         pedido.enviarProdutos(carrinho.get(i));
                     }
-                    Snackbar snackbar = Snackbar.make(view, "Pedido realizado com sucesso!", Snackbar.LENGTH_LONG);
-                    snackbar.setBackgroundTint(Color.rgb(20, 173, 0));
-                    snackbar.show();
+                    new PedidoHelper(CarrinhoActivity.this).limparCarrinho(CarrinhoActivity.this);
 
                     Intent intent = new Intent(getApplicationContext(), PedidoRealizado.class);
                     startActivity(intent);

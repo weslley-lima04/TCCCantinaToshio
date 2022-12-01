@@ -1,6 +1,10 @@
 package com.cantinatoshio.app;
 
+import com.cantinatoshio.app.api.Api;
+import com.cantinatoshio.app.api.PerformNetworkRequest;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cliente
 {
@@ -11,6 +15,8 @@ public class Cliente
     String telefoneCliente;
     String senhaCliente;
     static ArrayList<Pedido> pedidos;
+    private static final int CODE_GET_REQUEST = 1024;
+    private static final int CODE_POST_REQUEST = 1025;
 
 
     public int getIdCliente()
@@ -63,13 +69,34 @@ public class Cliente
         this.senhaCliente = senhaCliente;
     }
 
-    public ArrayList<Pedido> getPedidos()
-    {
-        return pedidos;
-    }
+
 
     public void setPedidos(ArrayList<Pedido> pedidos)
     {
         this.pedidos = pedidos;
     }
+
+    public static ArrayList<Pedido> getPedidos()
+    {
+        return pedidos;
+    }
+
+    public void getPedidosCliente()
+    {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("IDCliente",String.valueOf(this.idCliente));
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CLIENTE_PEDIDOS, params, CODE_POST_REQUEST);
+        try
+        {
+            request.execute();
+        }
+        catch (Exception e)
+        {
+            System.out.println("ERRO");
+        }
+
+    }
+
+
+
 }

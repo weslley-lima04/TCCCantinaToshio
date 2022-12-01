@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@id/LayoutStatusPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forma de pagamento"
+            android:text="Valor do Pedido"
             app:drawableStartCompat="@drawable/ic_baseline_arrow_right" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -107,8 +107,8 @@
 
         <TextView
             android:layout_marginTop="5dp"
-            android:id="@+id/formaPagamento"
-            android:text="Cartão"
+            android:id="@+id/valorPedido"
+            android:text="0.00"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:padding="10dp"
@@ -123,7 +123,7 @@
             app:layout_constraintStart_toStartOf="@+id/txtFormaPagamento"
             android:layout_marginTop="15dp"
             app:drawableStartCompat="@drawable/ic_baseline_arrow_right"
-            app:layout_constraintTop_toBottomOf="@id/formaPagamento"
+            app:layout_constraintTop_toBottomOf="@id/valorPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data do Pedido" />

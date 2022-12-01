@@ -12,9 +12,7 @@ import android.widget.TextView;
 public class ClickPedidosActivity extends AppCompatActivity
 {
 
-    TextView idPedido, statusPedido;
-    TextView dataPedido;
-    //posteriormente, status do Pedido, pagamento e data entrarão aqui
+    TextView idPedido, statusPedido, dataPedido, valorPedido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,19 +23,17 @@ public class ClickPedidosActivity extends AppCompatActivity
         idPedido = findViewById(R.id.txtClickIDPedido);
         statusPedido = findViewById(R.id.txtStatusPedido);
         dataPedido = findViewById(R.id.dataPedido);
+        valorPedido = findViewById(R.id.valorPedido);
 
         Intent intent = getIntent();
 
         //pegando a variável
-        String ClickDataPedido = intent.getStringExtra("dataPedido");
-       // String ClickHoraPedido = intent.getStringExtra("horaPedido");
-        String ClickidPedido = intent.getStringExtra("idPedido");
-        String ClickStatusPedido = intent.getStringExtra("statusPedido");
+        String ClickDataPedido = intent.getStringExtra("DataPedido");
+        String ClickidPedido = intent.getStringExtra("IDPedido");
 
         idPedido.setText(ClickidPedido);
         dataPedido.setText(ClickDataPedido);
-        statusPedido.setText(ClickStatusPedido);
-
+        valorPedido.setText(intent.getStringExtra("ValorPedido"));
 
         //pode dar erro
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

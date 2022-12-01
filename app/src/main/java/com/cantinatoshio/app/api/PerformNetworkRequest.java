@@ -6,9 +6,15 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 
+import com.cantinatoshio.app.Cliente;
+import com.cantinatoshio.app.Pedido;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
@@ -44,7 +50,21 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error"))
             {
-               // refreshHeroList(object.getJSONArray("pedido"));
+                ArrayList<Pedido> pedidos = new ArrayList<>();
+                System.out.println("SAINDO DO PERFORM");
+                JSONArray jsonArray = object.getJSONArray("PedidosCliente");
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    pedidos.add(new Pedido(
+                            obj.getInt("IDPedido"),
+                            obj.getInt("IDCliente"),
+                            obj.getString("DataPedido"),
+                            obj.getDouble("ValorPedido")
+                    ));
+                }
+                new Cliente().setPedidos(pedidos);
+
             }
         }
        catch (JSONException e)

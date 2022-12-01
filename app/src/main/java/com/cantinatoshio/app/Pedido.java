@@ -7,7 +7,6 @@ import com.cantinatoshio.app.api.Api;
 import com.cantinatoshio.app.api.PerformNetworkRequest;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.TimeZone;
@@ -15,7 +14,12 @@ import java.util.TimeZone;
 public class Pedido
 {
 
-    static int idPedido;
+    //usado para definir o id do próximo pedido
+    static int numPedidos;
+
+
+    //usado para definir o id do pedido passado
+    private int idPedido;
     private int idClientePedido = new Cliente().getIdCliente();
     private String DataPedido;
     private double valorPedido;
@@ -30,7 +34,7 @@ public class Pedido
 
     public Pedido(int idPedido, int idCliente, String dataPedido, double valorPedido)
     {
-        Pedido.idPedido = idPedido;
+        this.idPedido = idPedido;
         this.idClientePedido = idCliente;
         this.DataPedido = dataPedido;
         this.valorPedido = valorPedido;
@@ -89,6 +93,12 @@ public class Pedido
 
     }
 
+    public String getData()
+    {
+        return DataPedido;
+    }
+
+
     public String getDataPedido()
     {
         DateFormat formatter = DateFormat.getDateTimeInstance();
@@ -97,19 +107,26 @@ public class Pedido
         return formatter.format(date);
     }
 
+
+
     public double getValorPedido()
     {
         return valorPedido;
     }
 
-    public void setIdPedido(int idPedido)
+    public void setNumPedidos(int idPedido)
     {
-        Pedido.idPedido = idPedido;
+        Pedido.numPedidos = idPedido;
     }
 
     public int getIdPedido()
     {
-        return Pedido.idPedido;
+        return this.idPedido;
+    }
+
+    public static String returnNewIDPedido()
+    {
+        return String.valueOf(numPedidos + 1);
     }
 
     //tem de vir da API toda vez que um pedido novo é feito

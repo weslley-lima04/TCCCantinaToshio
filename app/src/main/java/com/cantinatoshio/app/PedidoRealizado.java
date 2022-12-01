@@ -19,7 +19,8 @@ public class PedidoRealizado extends AppCompatActivity {
         textView = findViewById(R.id.num_pedido);
         //System.out.println("SAIDA DO ID PEDIDO");
         //System.out.println(Pedido.idPedido);
-        textView.setText("#00" + String.valueOf(Pedido.idPedido + 1));
+        String newID = "#00" + Pedido.returnNewIDPedido();
+        textView.setText(newID);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

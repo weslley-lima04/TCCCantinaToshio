@@ -35,9 +35,9 @@ public class Salgados_Home_Fragment extends Fragment
         lista_salgados = view.findViewById(R.id.lista_salgados);
         salgados = new ArrayList<>();
 
-        salgados.add(new Produto("6","Coxinha", "Frango com catupiry", "6.00", "salgado", R.drawable.coxinha));
-        salgados.add(new Produto("7","Pão de Queijo", "Quente e crocante", "2.50", "salgado" ,R.drawable.fpaodequeijo));
-        salgados.add(new Produto("8", "Misto Quente", "Com queijo e presunto", "6.00", "salgado" ,R.drawable.misto));
+        salgados.add(new Produto("7","Coxinha", "Frango com catupiry", "6.00", "salgado", R.drawable.coxinha));
+        salgados.add(new Produto("8","Pão de Queijo", "Quente e crocante", "2.50", "salgado" ,R.drawable.fpaodequeijo));
+        salgados.add(new Produto("9", "Misto Quente", "Com queijo e presunto", "6.00", "salgado" ,R.drawable.misto));
 
         AdapterSalgados adapterSalgados = new AdapterSalgados(getContext(), salgados);
 

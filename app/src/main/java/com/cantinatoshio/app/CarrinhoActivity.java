@@ -84,23 +84,33 @@ public class CarrinhoActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                int idCliente = new Cliente().getIdCliente();
-                Pedido pedido = new Pedido(idCliente, calculaTotal);
-                boolean envio = pedido.enviarPedido();
-                if(envio)
+                if(Cliente.isLoggedIn)
                 {
-                    for (int i = 0; i <=carrinho.size()-1; i++)
+                    int idCliente = Cliente.idCliente;
+                    Pedido pedido = new Pedido(idCliente, calculaTotal);
+                    boolean envio = pedido.enviarPedido();
+                    if(envio)
                     {
-                        pedido.enviarProdutos(carrinho.get(i));
-                    }
-                    new PedidoHelper(CarrinhoActivity.this).limparCarrinho(CarrinhoActivity.this);
+                        for (int i = 0; i <=carrinho.size()-1; i++)
+                        {
+                            pedido.enviarProdutos(carrinho.get(i));
+                        }
+                        new PedidoHelper(CarrinhoActivity.this).limparCarrinho(CarrinhoActivity.this);
 
-                    Intent intent = new Intent(getApplicationContext(), PedidoRealizado.class);
-                    startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), PedidoRealizado.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(CarrinhoActivity.this, "Não foi possível realizar seu pedido...", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else
                 {
-                    Toast.makeText(CarrinhoActivity.this, "Não foi possível realizar seu pedido...", Toast.LENGTH_SHORT).show();
+                    Snackbar snackbar = Snackbar.make(view, "Você primeiro precisa fazer login!", Snackbar.LENGTH_LONG);
+                    snackbar.setBackgroundTint(Color.rgb(255, 165, 0));
+                    snackbar.setTextColor(Color.parseColor("#000000"));
+                    snackbar.show();
                 }
             }
         });

@@ -8,25 +8,20 @@ import java.util.HashMap;
 
 public class Cliente
 {
-
-    int idCliente = 1;
-    String nomeCliente;
-    String emailCliente;
-    String telefoneCliente;
-    String senhaCliente;
+    public static boolean isLoggedIn;
+    public static int idCliente;
+    private String nomeCliente;
+    private String emailCliente;
+    private String telefoneCliente;
+    private String senhaCliente;
     static ArrayList<Pedido> pedidos;
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
 
 
-    public int getIdCliente()
+    public static void setIdCliente(int idCliente)
     {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente)
-    {
-        this.idCliente = idCliente;
+        Cliente.idCliente = idCliente;
     }
 
     public String getNomeCliente()
@@ -69,17 +64,11 @@ public class Cliente
         this.senhaCliente = senhaCliente;
     }
 
-
-
     public void setPedidos(ArrayList<Pedido> pedidos)
     {
         this.pedidos = pedidos;
     }
 
-    public static ArrayList<Pedido> getPedidos()
-    {
-        return pedidos;
-    }
 
     public void getPedidosCliente()
     {
@@ -92,9 +81,26 @@ public class Cliente
         }
         catch (Exception e)
         {
-            System.out.println("ERRO");
+            System.out.println("Erro ao carregar pedidos.");
         }
 
+    }
+
+    public void logar(String email, String senha)
+    {
+        System.out.println("FUNÇÃO LOGAR EXECUTADA");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("email", email);
+        params.put("senha",senha);
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_LOGAR, params, CODE_POST_REQUEST);
+        try
+        {
+            request.execute();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Erro ao logar");
+        }
     }
 
 

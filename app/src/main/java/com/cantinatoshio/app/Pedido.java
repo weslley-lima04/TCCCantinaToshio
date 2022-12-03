@@ -20,7 +20,7 @@ public class Pedido
 
     //usado para definir o id do pedido passado
     private int idPedido;
-    private int idClientePedido = new Cliente().getIdCliente();
+    private int idClientePedido = Cliente.idCliente;
     private String DataPedido;
     private double valorPedido;
     private static final int CODE_GET_REQUEST = 1024;

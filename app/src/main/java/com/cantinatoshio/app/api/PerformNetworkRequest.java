@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
 {
@@ -28,7 +29,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
     int requestCode;
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
-   // ProgressBar progressBar;
+
 
     public PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode)
     {
@@ -50,26 +51,21 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
     {
         super.onPostExecute(s);
 //            progressBar.setVisibility(GONE);
-       try
+
+        //fazer switch aqui
+        try
         {
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error"))
             {
-                ArrayList<Pedido> pedidos = new ArrayList<>();
-                System.out.println("SAINDO DO PERFORM");
-                JSONArray jsonArray = object.getJSONArray("PedidosCliente");
-                for (int i = 0; i < jsonArray.length(); i++)
+                if(Objects.equals(url, Api.URL_CLIENTE_PEDIDOS))
                 {
-                    JSONObject obj = jsonArray.getJSONObject(i);
-                    pedidos.add(new Pedido(
-                            obj.getInt("IDPedido"),
-                            obj.getInt("IDCliente"),
-                            obj.getString("DataPedido"),
-                            obj.getDouble("ValorPedido")
-                    ));
+                    setPedidos(object);
                 }
-                new Cliente().setPedidos(pedidos);
-
+                if(Objects.equals(url, Api.URL_LOGAR))
+                {
+                    setIDCliente(object);
+                }
             }
         }
        catch (JSONException e)
@@ -93,5 +89,43 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
 
         return null;
     }
+
+    private void setPedidos(JSONObject object) throws JSONException
+    {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        System.out.println("SAINDO DO PERFORM");
+        JSONArray jsonArray = object.getJSONArray("PedidosCliente");
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject obj = jsonArray.getJSONObject(i);
+            pedidos.add(new Pedido(
+                    obj.getInt("IDPedido"),
+                    obj.getInt("IDCliente"),
+                    obj.getString("DataPedido"),
+                    obj.getDouble("ValorPedido")
+            ));
+        }
+        new Cliente().setPedidos(pedidos);
+    }
+
+    private void setIDCliente(JSONObject object) throws JSONException
+    {
+        System.out.println("FUNÇÃO SET ID CLIENTE EXECUTADA!");
+        int idCliente = 0;
+        JSONArray jsonArray = object.getJSONArray("IDCliente");
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject ids = jsonArray.getJSONObject(i);
+            idCliente = ids.getInt("ID");
+        }
+        System.out.println("ID DO CLIENTE:");
+        System.out.println(idCliente);
+        Cliente.setIdCliente(idCliente);
+        Cliente.isLoggedIn = true;
+    }
+
+
+
+
 }
 

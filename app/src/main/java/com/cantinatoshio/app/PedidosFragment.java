@@ -34,8 +34,6 @@ public class PedidosFragment extends Fragment
 
     RecyclerView listapedidos;
     ArrayList<Pedido> pedidos;
-    ProgressBar progressBar;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,11 +43,21 @@ public class PedidosFragment extends Fragment
       View view = inflater.inflate(R.layout.fragment_pedidos, container, false);
       pedidos = new ArrayList<>();
       listapedidos = view.findViewById(R.id.lst_pedidos);
-      pedidos = Cliente.pedidos;
-      if(pedidos == null || pedidos.size() == 0)
+
+      if(Cliente.isLoggedIn)
       {
-          view = inflater.inflate(R.layout.modelo_empty_pedidos, container, false);
+          pedidos = Cliente.pedidos;
+          if(pedidos == null || pedidos.size() == 0)
+          {
+              view = inflater.inflate(R.layout.modelo_empty_pedidos, container, false);
+          }
       }
+      else
+      {
+          view = inflater.inflate(R.layout.modelo_pedidos_deslogado, container, false);
+      }
+
+
 
       AdapterPedidos adapterPedidos = new AdapterPedidos(getContext(), pedidos);
 

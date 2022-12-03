@@ -67,7 +67,6 @@
 
         <!-- precisa ser removido-->
 
-        <!-- fazer remover item -->
         <ImageView
             android:id="@+id/delete_item"
             android:layout_width="wrap_content"
@@ -118,6 +117,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:layout_margin="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

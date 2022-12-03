@@ -16,4 +16,9 @@ public class Api
 
     public static final String URL_LAST_IDPEDIDO = "http://192.168.1.14/CantinaApi/CantinaAPI/includes/getPedidoID.php";
 
+
+    public static final String URL_LOGAR = ROOT_URL + "logar";
+
+
+
 }

@@ -17,7 +17,7 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class getData extends Thread
+public class GetData extends Thread
 {
 
     String id;

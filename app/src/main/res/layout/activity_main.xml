@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,14 +11,32 @@
         android:id="@+id/FrameContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnNav"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="-2dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="2dp" />
+        android:layout_marginBottom="55dp"
+        />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+
+        android:id="@+id/BtnNavAux"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="10dp"
+        app:fabCradleVerticalOffset="1dp"
+        >
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/btnNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/fundo_transparente"
+            app:itemIconTint="#423F3F"
+            app:itemTextColor="#423F3F"
+            app:menu="@menu/menu_btnnav" />
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCart"
@@ -26,24 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/FrameContainer"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/yellowapp"
         android:src="@drawable/ic_baseline_shopping_cart"
         app:borderWidth="0dp"
-        app:tint="@color/black" />
+        app:layout_anchor="@id/BtnNavAux"
+        app:tint="#423F3F" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
 
-        android:id="@+id/btnNav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-
-        app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/menu_btnnav" />
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

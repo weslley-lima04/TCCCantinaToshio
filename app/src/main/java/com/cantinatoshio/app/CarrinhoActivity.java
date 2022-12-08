@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cantinatoshio.app.Database.LoginTabela;
 import com.google.android.material.snackbar.Snackbar;
 import com.cantinatoshio.app.Database.PedidoHelper;
 
@@ -60,15 +59,6 @@ public class CarrinhoActivity extends AppCompatActivity
                 //limpando a tela
 
                 refresh();
-
-                LoginTabela loginTabela = new LoginTabela(getApplicationContext());
-                loginTabela.setLogin(3);
-
-                Cursor cursor = loginTabela.getLogin();
-                while (cursor.moveToNext())
-                {
-                    System.out.println(cursor.getString(0));
-                }
             }
         });
 

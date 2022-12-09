@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -34,6 +35,7 @@ public class PedidosFragment extends Fragment
 
     RecyclerView listapedidos;
     ArrayList<Pedido> pedidos;
+    Button entrar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +58,17 @@ public class PedidosFragment extends Fragment
       {
           view = inflater.inflate(R.layout.modelo_pedidos_deslogado, container, false);
       }
+
+      entrar = view.findViewById(R.id.btnEntrar);
+      entrar.setOnClickListener(new View.OnClickListener()
+      {
+          @Override
+          public void onClick(View view)
+          {
+              Intent intent = new Intent(getContext(), LogarActivity.class);
+              startActivity(intent);
+          }
+      });
 
 
 

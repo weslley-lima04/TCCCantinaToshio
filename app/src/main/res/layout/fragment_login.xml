@@ -11,20 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="35dp"
-            android:layout_marginEnd="35dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="35dp"
             android:layout_marginBottom="10dp"
             android:fitsSystemWindows="true"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="20dp"
-            >
+            android:padding="20dp">
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/UserName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="name"
@@ -39,18 +41,16 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:hint="E-mail"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinsregular" />
+                    android:fontFamily="@font/poppinsregular"
+                    android:hint="E-mail" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/UserPass"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="password"
@@ -58,17 +58,14 @@
                 android:fontFamily="@font/poppinsregular"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                app:boxStrokeColor="#9c9c9c"
                 app:endIconMode="password_toggle"
-                app:hintTextColor="#9c9c9c"
-                >
+                app:hintTextColor="#000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
-                    android:hint="Senha"
-                    />
+                    android:hint="Senha" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,42 +95,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floatingActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/CircleTwitter"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/twitter"
-                    app:backgroundTint="#FBFBFB"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floatingActionButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/CircleGoogle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/google"
-                    app:backgroundTint="#FBFBFB"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/face"
-                    app:backgroundTint="#FBFBFB"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/floatingActionButton"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/CircleFace"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/face"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

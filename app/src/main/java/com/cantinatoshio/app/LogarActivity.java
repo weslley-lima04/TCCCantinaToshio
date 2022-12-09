@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -14,9 +15,10 @@ public class LogarActivity extends AppCompatActivity {
     TabLoginAdapter viewPagerAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_logar);
 
         tabLayout = findViewById(R.id.tab_cadastro);
         viewPager2 = findViewById(R.id.view_pager);
@@ -46,6 +48,28 @@ public class LogarActivity extends AppCompatActivity {
                     tabLayout.getTabAt(position).select();
                 }
             });
+
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home)
+        {
+            onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
     }
 
 }

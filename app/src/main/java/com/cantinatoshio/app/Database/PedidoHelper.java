@@ -97,9 +97,8 @@ public class PedidoHelper extends SQLiteOpenHelper
     public void atualizaPreco(String id, String preco, SQLiteDatabase db)
     {
         String sql = "UPDATE " + PedidoTabela.EntradaPedido.TABLE_NAME +
-                " SET " + PedidoTabela.EntradaPedido.COLUMN_PRICE + " = " +
-                PedidoTabela.EntradaPedido.COLUMN_QUANTITY + "*" + preco +
-                " where " + PedidoTabela.EntradaPedido.COLUMN_ID + " = " + id;
+                " SET " + PedidoTabela.EntradaPedido.COLUMN_PRICE + " = " + PedidoTabela.EntradaPedido.COLUMN_PRICE + " + " +
+                preco + " where " + PedidoTabela.EntradaPedido.COLUMN_ID + " = " + id;
         db.execSQL(sql);
     }
 

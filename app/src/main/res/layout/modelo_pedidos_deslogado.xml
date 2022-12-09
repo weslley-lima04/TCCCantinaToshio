@@ -9,6 +9,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,15 +42,25 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:textAlignment="center"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Você pode fazer login clicando no botãozinho ali do começo."
+                android:text="Você pode fazer login clicando aqui embaixo."
                 android:textSize="15sp" />
 
+            <Button
+                android:id="@+id/btnEntrar"
+                android:layout_gravity="center_horizontal"
+                android:text="Entrar"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
+
 
 
     </com.google.android.material.card.MaterialCardView>

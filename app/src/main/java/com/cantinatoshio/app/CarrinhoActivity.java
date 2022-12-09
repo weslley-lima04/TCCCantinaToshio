@@ -67,13 +67,13 @@ public class CarrinhoActivity extends AppCompatActivity
         Cursor cursor = new PedidoHelper(this).getPedido();
         while (cursor.moveToNext())
         {
-            String titulo = cursor.getString(2);
+            int id = cursor.getInt(1);
 
             //calculando total
             calculaTotal = calculaTotal + Double.parseDouble(cursor.getString(4));
 
             //1 ID, 2 titulo, 3 qtd, 4 preco
-            Produto produto = new Produto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), selecionaImagem(titulo));
+            Produto produto = new Produto(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), selecionaImagem(id));
             carrinho.add(produto);
         }
 
@@ -161,48 +161,48 @@ public class CarrinhoActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
     }
 
-    private int selecionaImagem(String nome)
+    private int selecionaImagem(int id)
     {
         int img = 0;
-        switch (nome)
+        switch (id)
         {
-            case "Água":
+            case 6:
                 img = R.drawable.agua;
                 break;
-            case "Refrigerante":
+            case 5:
                 img = R.drawable.refri;
                 break;
-            case "Salada":
+            case 13:
                 img = R.drawable.salada;
                 break;
-            case "Fatia de bolo":
+            case 1:
                 img = R.drawable.bolo;
                 break;
-            case "Brigadeiro":
+            case 2:
                 img = R.drawable.brigadeiro;
                 break;
-            case "Mousse":
+            case 3:
                 img = R.drawable.mousse;
                 break;
-            case "Suco Natural":
+            case 4:
                 img = R.drawable.suco;
                 break;
-            case "Coxinha":
+            case 7:
                 img = R.drawable.coxinha;
                 break;
-            case "Pão de Queijo":
+            case 8:
                 img = R.drawable.fpaodequeijo;
                 break;
-            case "Misto Quente":
+            case 9:
                 img = R.drawable.misto;
                 break;
-            case "Combo batata frita e bacon":
+            case 10:
                 img = R.drawable.batatabacon;
                 break;
-            case "Combo Coca e burger":
+            case 11:
                 img = R.drawable.hamburgercoca;
                 break;
-            case "Combo café e pão de queijo":
+            case 12:
                 img = R.drawable.paocafe;
                 break;
         }

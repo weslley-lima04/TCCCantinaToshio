@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -31,7 +32,7 @@ import kotlin.time.TimeSource;
 
 public class MainActivity extends AppCompatActivity
 {
-
+    ActionBarDrawerToggle toggle;
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PedidosFragment pedidosFragment = new PedidosFragment();
@@ -54,7 +55,12 @@ public class MainActivity extends AppCompatActivity
 
 
         //chamando lista pedidos
-        new Cliente().getPedidosCliente();
+
+        if(Cliente.isLoggedIn)
+        {
+            new Cliente().getPedidosCliente();
+        }
+
 
         btnCart = findViewById(R.id.btnCart);
 
@@ -63,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         drawerLayout = findViewById(R.id.idNavDrawer);
         navigationView = findViewById(R.id.idNavigationView);
 
-                //getItem(R.id.menuPerfil_sair);
 
         //acessando os itens do header
         headerview = navigationView.getHeaderView(0);
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity
 
 
         //clique para abrir o NavDrawer
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -89,6 +94,25 @@ public class MainActivity extends AppCompatActivity
             exit.setIcon(R.drawable.ic_baseline_arrow_back);
             exit.setTitle("Entrar");
         }
+
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                System.out.println("INDO PRO CLICK NAVIGATION");
+                if (item.getItemId() == R.id.nav_menu_exit)
+                {
+                        Toast.makeText(MainActivity.this, "Click", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), LogarActivity.class);
+                        startActivity(intent);
+                }
+                return true;
+            }
+        });
+
+
 
         //parte do bottom navigation
 
@@ -108,9 +132,9 @@ public class MainActivity extends AppCompatActivity
                     case R.id.ic_pedidos:
                         callFragment(pedidosFragment);
                         return true;
-                    case R.id.ic_perfil:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, perfilFragment).commit();
-                        return true;
+                   // case R.id.ic_perfil:
+                        //getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, perfilFragment).commit();
+                        //return true;
                 }
 
                 return false;
@@ -133,6 +157,5 @@ public class MainActivity extends AppCompatActivity
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, fragment).commit();
     }
-
 
 }

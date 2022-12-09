@@ -52,8 +52,8 @@ public class PerfilFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                Intent intent = new Intent(getContext(), CadastroActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(getContext(), CadastroActivity.class);
+              //  startActivity(intent);
             }
         });
 

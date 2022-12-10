@@ -10,10 +10,10 @@ public class Cliente
 {
     public static boolean isLoggedIn;
     public static int idCliente;
-    private String nomeCliente;
-    private String emailCliente;
-    private String telefoneCliente;
-    private String senhaCliente;
+    public static String nomeCliente;
+    public static String emailCliente;
+    public static String telefoneCliente;
+
     static ArrayList<Pedido> pedidos;
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
@@ -31,7 +31,7 @@ public class Cliente
 
     public void setNomeCliente(String nomeCliente)
     {
-        this.nomeCliente = nomeCliente;
+        Cliente.nomeCliente = nomeCliente;
     }
 
     public String getEmailCliente()
@@ -41,7 +41,7 @@ public class Cliente
 
     public void setEmailCliente(String emailCliente)
     {
-        this.emailCliente = emailCliente;
+        Cliente.emailCliente = emailCliente;
     }
 
     public String getTelefoneCliente()
@@ -51,18 +51,9 @@ public class Cliente
 
     public void setTelefoneCliente(String telefoneCliente)
     {
-        this.telefoneCliente = telefoneCliente;
+        Cliente.telefoneCliente = telefoneCliente;
     }
 
-    public String getSenhaCliente()
-    {
-        return senhaCliente;
-    }
-
-    public void setSenhaCliente(String senhaCliente)
-    {
-        this.senhaCliente = senhaCliente;
-    }
 
     public void setPedidos(ArrayList<Pedido> pedidos)
     {
@@ -100,6 +91,22 @@ public class Cliente
         catch (Exception e)
         {
             System.out.println("Erro ao logar");
+        }
+    }
+
+    public void getLoginStatus(int idCliente)
+    {
+        System.out.println("FUNÇÃO GET LOGIN EXECUTADA");
+        HashMap<String, String> params = new HashMap<>();
+        params.put("idCliente", String.valueOf(idCliente));
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_GET_LOGIN_STATUS, params, CODE_POST_REQUEST);
+        try
+        {
+            request.execute();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Erro ao enviar request.");
         }
     }
 

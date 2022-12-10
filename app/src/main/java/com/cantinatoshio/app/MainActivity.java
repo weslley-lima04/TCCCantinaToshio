@@ -25,6 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
@@ -51,8 +53,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
 
-        //chamando lista pedidos
+        //função que checa status de login
+        if(!Objects.isNull(Cliente.idCliente))
+        {
+            new Cliente().getLoginStatus(Cliente.idCliente);
+        }
 
+        //chamando lista pedidos
         if(Cliente.isLoggedIn)
         {
             new Cliente().getPedidosCliente();
@@ -94,8 +101,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             exit.setIcon(R.drawable.ic_baseline_arrow_back);
             exit.setTitle("Entrar");
         }
-
-
+        else
+        {
+            navUsername.setText(Cliente.nomeCliente);
+            navUseremail.setText(Cliente.emailCliente);
+        }
 
 
         //parte do bottom navigation
@@ -145,13 +155,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
-
-        System.out.println("INDO PRO CLICK NAVIGATION");
         if (item.getItemId() == R.id.nav_menu_exit)
         {
-            Toast.makeText(MainActivity.this, "Click", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), LogarActivity.class);
-            startActivity(intent);
+            if(!Cliente.isLoggedIn)
+            {
+                Intent intent = new Intent(getApplicationContext(), LogarActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                Cliente.isLoggedIn = false;
+                refresh();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(this, "Deslogado com sucesso.", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -186,5 +205,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void refresh()
+    {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }

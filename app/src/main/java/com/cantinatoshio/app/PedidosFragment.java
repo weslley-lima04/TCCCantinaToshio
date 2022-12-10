@@ -57,18 +57,19 @@ public class PedidosFragment extends Fragment
       else
       {
           view = inflater.inflate(R.layout.modelo_pedidos_deslogado, container, false);
+          entrar = view.findViewById(R.id.btnEntrar);
+          entrar.setOnClickListener(new View.OnClickListener()
+          {
+              @Override
+              public void onClick(View view)
+              {
+                  Intent intent = new Intent(getContext(), LogarActivity.class);
+                  startActivity(intent);
+              }
+          });
       }
 
-      entrar = view.findViewById(R.id.btnEntrar);
-      entrar.setOnClickListener(new View.OnClickListener()
-      {
-          @Override
-          public void onClick(View view)
-          {
-              Intent intent = new Intent(getContext(), LogarActivity.class);
-              startActivity(intent);
-          }
-      });
+
 
 
 

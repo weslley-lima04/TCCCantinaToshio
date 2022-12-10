@@ -1,13 +1,8 @@
 package com.cantinatoshio.app.api;
 
 
-
-import static android.view.View.GONE;
-
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 
 
 import com.cantinatoshio.app.Cliente;
@@ -17,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -43,7 +37,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
     protected void onPreExecute()
     {
         super.onPreExecute();
-       // progressBar.setVisibility(View.VISIBLE);
+        // progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -58,20 +52,25 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
             JSONObject object = new JSONObject(s);
             if (!object.getBoolean("error"))
             {
-                if(Objects.equals(url, Api.URL_CLIENTE_PEDIDOS))
+                if (Objects.equals(url, Api.URL_CLIENTE_PEDIDOS))
                 {
                     setPedidos(object);
                 }
-                if(Objects.equals(url, Api.URL_LOGAR))
+                if (Objects.equals(url, Api.URL_LOGAR))
                 {
-                    setIDCliente(object);
+                    getDadosCliente(object);
                 }
+
+                if (Objects.equals(url, Api.URL_GET_LOGIN_STATUS))
+                {
+                    setStatusLogin(object);
+                }
+
             }
-        }
-       catch (JSONException e)
+        } catch (JSONException e)
         {
 
-            Log.e("JSON Parser", "Error parsing data [" + e.getMessage()+"] "+ s);
+            Log.e("JSON Parser", "Error parsing data [" + e.getMessage() + "] " + s);
         }
     }
 
@@ -108,23 +107,37 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
         new Cliente().setPedidos(pedidos);
     }
 
-    private void setIDCliente(JSONObject object) throws JSONException
+    private void getDadosCliente(JSONObject object) throws JSONException
     {
-        System.out.println("FUNÇÃO SET ID CLIENTE EXECUTADA!");
-        int idCliente = 0;
-        JSONArray jsonArray = object.getJSONArray("IDCliente");
+        System.out.println("FUNÇÃO GET DADOS CLIENTE EXECUTADA!");
+
+
+        JSONArray jsonArray = object.getJSONArray("Dados");
         for (int i = 0; i < jsonArray.length(); i++)
         {
-            JSONObject ids = jsonArray.getJSONObject(i);
-            idCliente = ids.getInt("ID");
+            JSONObject dados = jsonArray.getJSONObject(i);
+            Cliente.idCliente = dados.getInt("IDCliente");
+            Cliente.isLoggedIn = dados.getBoolean("statusLogin");
+            Cliente.nomeCliente = dados.getString("Nome");
+            Cliente.telefoneCliente = dados.getString("Telefone");
+            Cliente.emailCliente = dados.getString("Email");
         }
-        System.out.println("ID DO CLIENTE:");
-        System.out.println(idCliente);
-        Cliente.setIdCliente(idCliente);
-        Cliente.isLoggedIn = true;
+
+        System.out.println("Funcionou");
+        System.out.println(Cliente.isLoggedIn);
     }
 
+    private void setStatusLogin(JSONObject object) throws JSONException
+    {
+        JSONArray jsonArray = object.getJSONArray("statusLogin");
 
+        for (int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject statusLogin = jsonArray.getJSONObject(i);
+            Cliente.isLoggedIn = statusLogin.getBoolean("Status");
+        }
+
+    }
 
 
 }

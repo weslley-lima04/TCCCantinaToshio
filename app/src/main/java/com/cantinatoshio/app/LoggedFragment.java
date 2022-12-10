@@ -38,8 +38,8 @@ public class LoggedFragment extends Fragment
                 {
                     case R.id.menuPerfil_sair:
                         Cliente.isLoggedIn = false;
-                        PerfilFragment perfilFragment = new PerfilFragment();
-                        getParentFragmentManager().beginTransaction().replace(R.id.FrameContainer, perfilFragment).commit();
+
+                     //   getParentFragmentManager().beginTransaction().replace(R.id.FrameContainer, perfilFragment).commit();
                         return true;
                 }
                 return false;

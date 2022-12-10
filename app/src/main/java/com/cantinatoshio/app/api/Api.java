@@ -20,5 +20,8 @@ public class Api
     public static final String URL_LOGAR = ROOT_URL + "logar";
 
 
+    public static final String URL_GET_LOGIN_STATUS = ROOT_URL + "statusLogin";
+
+
 
 }

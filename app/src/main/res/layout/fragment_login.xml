@@ -25,7 +25,7 @@
             android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/UserName"
+
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,6 +40,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUserEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
@@ -49,7 +50,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/UserPass"
+
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
                 app:hintTextColor="#000">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUserPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
@@ -71,7 +73,7 @@
 
 
             <Button
-                android:id="@+id/btnCadastrar"
+                android:id="@+id/btnLogar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

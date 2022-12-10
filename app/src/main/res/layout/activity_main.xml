@@ -2,26 +2,13 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/idNavDrawer"
+    android:id="@+id/idDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity"
-    tools:openDrawer="start"
-    >
+    tools:openDrawer="start">
 
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/idNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@drawable/gradient_nav"
-        app:headerLayout="@layout/header_nav"
-        app:itemIconSize="35dp"
-        app:itemIconTint="#5C5858"
-        app:itemTextColor="#4C4949"
-        app:menu="@menu/menu_nav" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,8 +25,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/appBarLayout"
-            />
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/idNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@drawable/gradient_nav"
+        app:headerLayout="@layout/header_nav"
+        app:itemIconSize="35dp"
+        app:itemIconTint="#5C5858"
+        app:itemTextColor="#4C4949"
+        app:menu="@menu/menu_nav" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -75,8 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:background="@drawable/fundo_transparente"
                 app:itemIconTint="#423F3F"
                 app:itemTextColor="#423F3F"

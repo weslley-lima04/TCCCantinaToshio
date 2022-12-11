@@ -13,7 +13,7 @@ public class Cliente
     public static String nomeCliente;
     public static String emailCliente;
     public static String telefoneCliente;
-
+    public static String senhaCliente;
     static ArrayList<Pedido> pedidos;
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
@@ -91,22 +91,6 @@ public class Cliente
         catch (Exception e)
         {
             System.out.println("Erro ao logar");
-        }
-    }
-
-    public void getLoginStatus(int idCliente)
-    {
-        System.out.println("FUNÇÃO GET LOGIN EXECUTADA");
-        HashMap<String, String> params = new HashMap<>();
-        params.put("idCliente", String.valueOf(idCliente));
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_GET_LOGIN_STATUS, params, CODE_POST_REQUEST);
-        try
-        {
-            request.execute();
-        }
-        catch (Exception e)
-        {
-            System.out.println("Erro ao enviar request.");
         }
     }
 

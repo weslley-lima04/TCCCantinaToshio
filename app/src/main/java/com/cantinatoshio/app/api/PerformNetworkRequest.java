@@ -61,11 +61,6 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
                     getDadosCliente(object);
                 }
 
-                if (Objects.equals(url, Api.URL_GET_LOGIN_STATUS))
-                {
-                    setStatusLogin(object);
-                }
-
             }
         } catch (JSONException e)
         {
@@ -112,32 +107,32 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
         System.out.println("FUNÇÃO GET DADOS CLIENTE EXECUTADA!");
 
 
-        JSONArray jsonArray = object.getJSONArray("Dados");
-        for (int i = 0; i < jsonArray.length(); i++)
-        {
-            JSONObject dados = jsonArray.getJSONObject(i);
-            Cliente.idCliente = dados.getInt("IDCliente");
-            Cliente.isLoggedIn = dados.getBoolean("statusLogin");
-            Cliente.nomeCliente = dados.getString("Nome");
-            Cliente.telefoneCliente = dados.getString("Telefone");
-            Cliente.emailCliente = dados.getString("Email");
-        }
+        String message = object.getString("message");
+        System.out.println("PRINTANDO O ARRAY 2");
+        System.out.println(message);
 
+        if(message.equals("logado com sucesso"))
+        {
+            JSONArray jsonArray = object.getJSONArray("Dados");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject dados = jsonArray.getJSONObject(i);
+                Cliente.idCliente = dados.getInt("IDCliente");
+                Cliente.isLoggedIn = dados.getBoolean("statusLogin");
+                Cliente.nomeCliente = dados.getString("Nome");
+                Cliente.telefoneCliente = dados.getString("Telefone");
+                Cliente.emailCliente = dados.getString("Email");
+                Cliente.senhaCliente = dados.getString("Senha");
+            }
+        }
+        else
+        {
+            Cliente.isLoggedIn = false;
+        }
         System.out.println("Funcionou");
         System.out.println(Cliente.isLoggedIn);
     }
 
-    private void setStatusLogin(JSONObject object) throws JSONException
-    {
-        JSONArray jsonArray = object.getJSONArray("statusLogin");
-
-        for (int i = 0; i < jsonArray.length(); i++)
-        {
-            JSONObject statusLogin = jsonArray.getJSONObject(i);
-            Cliente.isLoggedIn = statusLogin.getBoolean("Status");
-        }
-
-    }
 
 
 }

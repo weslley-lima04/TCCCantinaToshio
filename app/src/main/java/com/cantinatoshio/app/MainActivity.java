@@ -52,13 +52,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //função que checa status de login
-        if(!Objects.isNull(Cliente.idCliente))
-        {
-            new Cliente().getLoginStatus(Cliente.idCliente);
-        }
-
         //chamando lista pedidos
         if(Cliente.isLoggedIn)
         {
@@ -106,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navUsername.setText(Cliente.nomeCliente);
             navUseremail.setText(Cliente.emailCliente);
         }
+
 
 
         //parte do bottom navigation
@@ -164,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             else
             {
-                Cliente.isLoggedIn = false;
+                new Cliente().logar(Cliente.emailCliente, Cliente.senhaCliente);
                 refresh();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);

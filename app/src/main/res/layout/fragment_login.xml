@@ -57,12 +57,13 @@
                 android:autofillHints="password"
                 android:elevation="1dp"
                 android:fontFamily="@font/poppinsregular"
-                android:inputType="textPassword"
+                app:boxStrokeColor="#9c9c9c"
                 android:maxLines="1"
                 app:endIconMode="password_toggle"
                 app:hintTextColor="#000">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:inputType="textPassword"
                     android:id="@+id/inputUserPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

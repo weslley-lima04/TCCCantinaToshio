@@ -75,7 +75,7 @@
                 android:autofillHints="password"
                 android:elevation="1dp"
                 android:fontFamily="@font/poppinsregular"
-                android:inputType="textPassword"
+
                 android:maxLines="1"
                 app:boxStrokeColor="#9c9c9c"
                 app:endIconMode="password_toggle"
@@ -86,7 +86,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
-                    android:hint="Senha" />
+                    android:hint="Senha"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +99,7 @@
                 android:autofillHints="password"
                 android:elevation="1dp"
                 android:fontFamily="@font/poppinsregular"
-                android:inputType="textPassword"
+
                 android:maxLines="1"
                 app:boxStrokeColor="#9c9c9c"
                 app:endIconMode="password_toggle"
@@ -108,7 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
-                    android:hint="Confirme sua senha" />
+                    android:hint="Confirme sua senha"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

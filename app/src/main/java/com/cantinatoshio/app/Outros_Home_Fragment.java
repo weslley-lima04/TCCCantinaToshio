@@ -39,7 +39,6 @@ public class Outros_Home_Fragment extends Fragment
         outros.add(new Produto("10","Combo batata frita e bacon", "Cheddar opcional", "10.00", "outros", R.drawable.batatabacon));
         outros.add(new Produto("11","Combo Coca e burger", "Hamburguer simples", "10.0", "outros" ,R.drawable.hamburgercoca));
         outros.add(new Produto("12", "Combo café e pão de queijo", "Acompanha 10 pães de queijo", "8.00", "outros" ,R.drawable.paocafe));
-        outros.add(new Produto("13", "Salada", "Tomate, cebola e alface", "6.00", "outros" ,R.drawable.salada));
 
         AdapterOutros adapterOutros = new AdapterOutros(getContext(), outros);
 

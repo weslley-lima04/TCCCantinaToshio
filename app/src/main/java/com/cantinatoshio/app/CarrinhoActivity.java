@@ -172,9 +172,6 @@ public class CarrinhoActivity extends AppCompatActivity
             case 5:
                 img = R.drawable.refri;
                 break;
-            case 13:
-                img = R.drawable.salada;
-                break;
             case 1:
                 img = R.drawable.bolo;
                 break;

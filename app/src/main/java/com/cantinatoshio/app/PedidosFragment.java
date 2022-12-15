@@ -2,6 +2,8 @@ package com.cantinatoshio.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -92,6 +94,7 @@ public class PedidosFragment extends Fragment
     {
         private ArrayList<Pedido> pedidos;
         private Context context;
+        String statusPedido = "5";
 
         public AdapterPedidos(Context context, ArrayList<Pedido> pedidos)
         {
@@ -114,9 +117,33 @@ public class PedidosFragment extends Fragment
         public void onBindViewHolder(@NonNull AdapterPedidos.ViewHolder holder, int position)
         {
             String id  = "#00" + pedidos.get(position).getIdPedido();
+
+
+
             holder.txt_idPedido.setText(id);
             holder.txt_dataPedido.setText(pedidos.get(position).getData());
             holder.txtValorPedido.setText(String.valueOf(pedidos.get(position).getValorPedido()));
+
+            statusPedido = String.valueOf(pedidos.get(position).getStatusPedido());
+            if(statusPedido.equals("0") || statusPedido.equals("1"))
+            {
+                statusPedido = "Em espera";
+                holder.txtStatusPedido.setText(statusPedido);
+                holder.txtStatusPedido.setTextColor(Color.rgb(198, 181, 0));
+            }
+            if(statusPedido.equals("2"))
+            {
+                statusPedido = "Recusado";
+                holder.txtStatusPedido.setText(statusPedido);
+                holder.txtStatusPedido.setTextColor(Color.parseColor("#d00000"));
+            }
+            if(statusPedido.equals("3"))
+            {
+                statusPedido = "Finalizado";
+                holder.txtStatusPedido.setText(statusPedido);
+                holder.txtStatusPedido.setTextColor(Color.rgb(48, 231, 0));
+            }
+
 
             holder.cardPedidos.setOnClickListener(new View.OnClickListener()
             {
@@ -127,6 +154,7 @@ public class PedidosFragment extends Fragment
                     intent.putExtra("IDPedido", id);
                     intent.putExtra("DataPedido", pedidos.get(position).getData());
                     intent.putExtra("ValorPedido", String.valueOf(pedidos.get(position).getValorPedido()));
+                    intent.putExtra("StatusPedido",statusPedido);
 
                     context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
@@ -143,16 +171,17 @@ public class PedidosFragment extends Fragment
         public class ViewHolder extends RecyclerView.ViewHolder
         {
             CardView cardPedidos;
-            TextView txt_dataPedido, txt_idPedido, txtValorPedido;
+            TextView txt_dataPedido, txt_idPedido, txtValorPedido, txtStatusPedido;
 
 
             public ViewHolder(View view)
             {
                 super(view);
-                cardPedidos = itemView.findViewById(R.id.cardPedidos);
-                txt_dataPedido = itemView.findViewById(R.id.txt_dataPedido);
-                txt_idPedido = itemView.findViewById(R.id.txt_idPedido);
-                txtValorPedido = itemView.findViewById(R.id.txtValorPedido);
+                cardPedidos = view.findViewById(R.id.cardPedidos);
+                txt_dataPedido = view.findViewById(R.id.txt_dataPedido);
+                txt_idPedido = view.findViewById(R.id.txt_idPedido);
+                txtValorPedido = view.findViewById(R.id.txtValorPedido);
+                txtStatusPedido = view.findViewById(R.id.txt_Status);
             }
         }
     }

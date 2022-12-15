@@ -96,7 +96,9 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String>
                     obj.getInt("IDPedido"),
                     obj.getInt("IDCliente"),
                     obj.getString("DataPedido"),
-                    obj.getDouble("ValorPedido")
+                    obj.getDouble("ValorPedido"),
+                    obj.getInt("Confirmado")
+
             ));
         }
         new Cliente().setPedidos(pedidos);

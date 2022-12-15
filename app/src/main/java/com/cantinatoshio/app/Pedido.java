@@ -23,6 +23,7 @@ public class Pedido
     private int idClientePedido = Cliente.idCliente;
     private String DataPedido;
     private double valorPedido;
+    private int statusPedido;
     private static final int CODE_GET_REQUEST = 1024;
     private static final int CODE_POST_REQUEST = 1025;
 
@@ -32,14 +33,19 @@ public class Pedido
 
     }
 
-    public Pedido(int idPedido, int idCliente, String dataPedido, double valorPedido)
+    public Pedido(int idPedido, int idCliente, String dataPedido, double valorPedido, int statusPedido)
     {
         this.idPedido = idPedido;
         this.idClientePedido = idCliente;
         this.DataPedido = dataPedido;
         this.valorPedido = valorPedido;
+        this.statusPedido = statusPedido;
     }
 
+    public int getStatusPedido()
+    {
+        return statusPedido;
+    }
 
     //sem id, pra gerar Pedido
     public Pedido(int idCliente, double valorPedido)

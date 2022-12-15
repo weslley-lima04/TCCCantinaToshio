@@ -30,10 +30,12 @@ public class ClickPedidosActivity extends AppCompatActivity
         //pegando a variável
         String ClickDataPedido = intent.getStringExtra("DataPedido");
         String ClickidPedido = intent.getStringExtra("IDPedido");
+        String ClickStatus = intent.getStringExtra("StatusPedido");
 
         idPedido.setText(ClickidPedido);
         dataPedido.setText(ClickDataPedido);
         valorPedido.setText(intent.getStringExtra("ValorPedido"));
+        statusPedido.setText(ClickStatus);
 
         //pode dar erro
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

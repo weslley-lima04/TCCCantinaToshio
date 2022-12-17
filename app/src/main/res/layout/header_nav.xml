@@ -3,23 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="185dp"
+    android:id="@+id/constraintLayout"
     android:background="@color/grayapp"
+    android:paddingTop="20dp"
+    android:paddingBottom="10dp"
+    android:paddingStart="20dp"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:paddingStart="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
             android:id="@+id/circleImageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -34,33 +29,31 @@
 
         <TextView
             android:id="@+id/navUserName"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:fontFamily="@font/poppinsbold"
             android:text="Seu Nome"
             android:textAlignment="textStart"
             android:textColor="#4A4646"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/circleImageView"
             app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
         <TextView
             android:id="@+id/navUserEmail"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsmedium"
             android:text="Seu e-mail"
             android:textColor="#595656"
-            android:textSize="15sp"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/navUserName"
-            app:layout_constraintTop_toBottomOf="@+id/navUserName" />
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#D6CECE"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>

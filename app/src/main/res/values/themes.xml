@@ -9,7 +9,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Light.CantinaToshio" parent="Theme.MaterialComponents.DayNight">>
+    <style name="Theme.Light.CantinaToshio" parent="Theme.MaterialComponents.Light">>
         <!-- Primary brand color. -->
         <item name="android:windowActionBar">false</item>
         <item name="colorPrimary">#ffd200</item>
@@ -23,12 +23,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:statusBarColor">@color/yellowapp</item>
     </style>
 
-    <style name="Theme.Sem_Barra" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Sem_Barra" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="android:windowActionBar">false</item>
         <item name="colorPrimary">#ffd200</item>

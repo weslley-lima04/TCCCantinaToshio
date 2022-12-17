@@ -9,6 +9,7 @@
     tools:context=".PedidoRealizado">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintPedidoR"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,4 +127,18 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/returnMenu"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:elevation="1dp"
+        app:layout_constraintTop_toBottomOf="@id/constraintPedidoR"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Voltar para o menu"
+        android:textColor="#5E5E5E"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

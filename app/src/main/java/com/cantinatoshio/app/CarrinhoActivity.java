@@ -1,6 +1,8 @@
 package com.cantinatoshio.app;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -19,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cantinatoshio.app.api.Admin;
 import com.google.android.material.snackbar.Snackbar;
 import com.cantinatoshio.app.Database.PedidoHelper;
 
@@ -104,12 +107,45 @@ public class CarrinhoActivity extends AppCompatActivity
                         Toast.makeText(CarrinhoActivity.this, "Não foi possível realizar seu pedido...", Toast.LENGTH_SHORT).show();
                     }
                 }
+                else if(Admin.adminIsLogged)
+                {
+                    Pedido pedido = new Pedido(Admin.idAdmin, calculaTotal);
+                    Admin.adminPedidos.add(pedido);
+                    Intent intent = new Intent(getApplicationContext(), PedidoRealizado.class);
+                    startActivity(intent);
+                    new PedidoHelper(CarrinhoActivity.this).limparCarrinho(CarrinhoActivity.this);
+                }
                 else
                 {
-                    Snackbar snackbar = Snackbar.make(view, "Você primeiro precisa fazer login!", Snackbar.LENGTH_LONG);
-                    snackbar.setBackgroundTint(Color.rgb(255, 165, 0));
-                    snackbar.setTextColor(Color.parseColor("#000000"));
-                    snackbar.show();
+                    AlertDialog alertDialog;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CarrinhoActivity.this);
+                    builder.setTitle("Usuário deslogado!");
+                    builder.setMessage("Você primeiro precisa logar! Deseja ir para a página de login?");
+                    builder.setIcon(R.drawable.logosf);
+
+                    builder.setNegativeButton("Não", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Login cancelado.", Toast.LENGTH_LONG);
+                            toast.show();
+                        }
+                    });
+
+                    builder.setPositiveButton("Sim", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i)
+                        {
+                            Intent intent = new Intent(getApplicationContext(), LogarActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    alertDialog = builder.create();
+                    alertDialog.show();
+
                 }
             }
         });

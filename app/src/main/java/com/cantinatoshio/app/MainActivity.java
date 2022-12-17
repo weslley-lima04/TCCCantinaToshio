@@ -9,8 +9,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.Menu;
@@ -19,11 +23,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cantinatoshio.app.api.Admin;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -35,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     PedidosFragment pedidosFragment = new PedidosFragment();
-  //  PerfilFragment perfilFragment = new PerfilFragment();
     FloatingActionButton btnCart;
 
     //Drawer Layout
@@ -51,13 +56,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //chamando lista pedidos
-        if(Cliente.isLoggedIn)
-        {
-            new Cliente().getPedidosCliente();
-        }
-
 
         btnCart = findViewById(R.id.btnCart);
 
@@ -81,12 +79,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuItem exit = menu.findItem(R.id.nav_menu_exit);
 
 
-        //clique para abrir o NavDrawer
-
-
-        //setando infos do perfil conforme login
-
-        if(!Cliente.isLoggedIn)
+        //chamando lista pedidos e setando infos do perfil conforme login
+        if(Cliente.isLoggedIn)
+        {
+            new Cliente().getPedidosCliente();
+            navUsername.setText(Cliente.nomeCliente);
+            navUseremail.setText(Cliente.emailCliente);
+        }
+        else if(Admin.adminIsLogged)
+        {
+            navUsername.setText("Administrador");
+            navUseremail.setText(Admin.emailAdmin);
+            userImage.setImageResource(R.drawable.admin);
+        }
+        else
         {
             navUsername.setVisibility(View.GONE);
             navUseremail.setVisibility(View.GONE);
@@ -94,13 +100,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             exit.setIcon(R.drawable.ic_baseline_arrow_back);
             exit.setTitle("Entrar");
         }
-        else
+
+        //checando conexão
+        View parentRelative = findViewById(R.id.parentRelative);
+
+        if(!isConnected())
         {
-            navUsername.setText(Cliente.nomeCliente);
-            navUseremail.setText(Cliente.emailCliente);
+            Snackbar snackbar = Snackbar.make(parentRelative, "Sem conexão", Snackbar.LENGTH_LONG);
+            snackbar.setBackgroundTint(Color.rgb(201, 14, 1));
+            snackbar.show();
         }
-
-
 
         //parte do bottom navigation
 
@@ -120,9 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.ic_pedidos:
                         callFragment(pedidosFragment);
                         return true;
-                   // case R.id.ic_perfil:
-                        //getSupportFragmentManager().beginTransaction().replace(R.id.FrameContainer, perfilFragment).commit();
-                        //return true;
                 }
 
                 return false;
@@ -151,10 +157,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         if (item.getItemId() == R.id.nav_menu_exit)
         {
-            if(!Cliente.isLoggedIn)
+            if(!Cliente.isLoggedIn && !Admin.adminIsLogged)
             {
                 Intent intent = new Intent(getApplicationContext(), LogarActivity.class);
                 startActivity(intent);
+            }
+            else if(Admin.adminIsLogged)
+            {
+              Admin.adminIsLogged = false;
+              Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+              startActivity(intent);
+              Toast.makeText(this, "Deslogado com sucesso.", Toast.LENGTH_SHORT).show();
             }
             else
             {
@@ -208,4 +221,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(getIntent());
         overridePendingTransition(0, 0);
     }
+
+    private boolean isConnected()
+    {
+        ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nInfo = cm.getActiveNetworkInfo();
+        boolean connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+        return connected;
+    }
+
 }

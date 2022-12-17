@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.cantinatoshio.app.api.Admin;
 import com.cantinatoshio.app.api.Api;
 
 import java.text.DateFormat;
@@ -56,6 +57,14 @@ public class PedidosFragment extends Fragment
               view = inflater.inflate(R.layout.modelo_empty_pedidos, container, false);
           }
       }
+      else if(Admin.adminIsLogged)
+      {
+        pedidos = Admin.adminPedidos;
+        if(pedidos == null || pedidos.size() == 0)
+        {
+           view = inflater.inflate(R.layout.modelo_empty_pedidos, container, false);
+        }
+      }
       else
       {
           view = inflater.inflate(R.layout.modelo_pedidos_deslogado, container, false);
@@ -70,9 +79,6 @@ public class PedidosFragment extends Fragment
               }
           });
       }
-
-
-
 
 
       AdapterPedidos adapterPedidos = new AdapterPedidos(getContext(), pedidos);

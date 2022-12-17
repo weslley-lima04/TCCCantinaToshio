@@ -1,5 +1,7 @@
 package com.cantinatoshio.app;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cantinatoshio.app.api.Admin;
 import com.google.android.material.textfield.TextInputEditText;
 
 
@@ -20,6 +23,7 @@ public class LoginFragment extends Fragment
 
     Button btnlogar;
     TextInputEditText inputemail, inputsenha;
+    AlertDialog alertDialog;
 
 
     @Override
@@ -42,15 +46,51 @@ public class LoginFragment extends Fragment
                 String senha = inputsenha.getText().toString().trim();
                 if(checkVazio(email, senha))
                 {
-                    try
+                    if(email.equals(Admin.emailAdmin) && senha.equals(Admin.passAdmin))
                     {
-                        new Cliente().logar(email, senha);
-                        Intent intent = new Intent(getContext(), MainActivity.class);
-                        startActivity(intent);
+                        System.out.println("Logando como administrador!");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Confirmar");
+                        builder.setMessage("Deseja logar como administrador?");
+                        builder.setIcon(R.drawable.logosf);
+                        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
+                            {
+                                Toast toast = Toast.makeText(getContext(), "Login cancelado.", Toast.LENGTH_LONG);
+                                toast.show();
+                                inputemail.setText("");
+                                inputsenha.setText("");
+                            }
+                        });
+
+                        builder.setPositiveButton("Sim, eu desejo", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i)
+                            {
+                                Admin.adminIsLogged = true;
+                                Intent intent = new Intent(getContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        alertDialog = builder.create();
+                        alertDialog.show();
+
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Toast.makeText(getContext(), "Falha ao fazer login.", Toast.LENGTH_LONG).show();
+                        try
+                        {
+                            new Cliente().logar(email, senha);
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            startActivity(intent);
+                        } catch (Exception e)
+                        {
+                            Toast.makeText(getContext(), "Falha ao fazer login.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             }
